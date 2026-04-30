@@ -1,2 +1,3 @@
 /gift.appli/src/vendor/
 composer.lock
+/gift.appli/src/conf/gift.db.conf.ini.dist
