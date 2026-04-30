@@ -13,7 +13,16 @@ $db->addConnection($conf);
 $db->setAsGlobal();
 $db->bootEloquent();
 
-echo "--- Test 2.b ---\n";
+echo "Test 2.b\n";
 foreach (Categorie::all() as $categorie) {
     echo $categorie->id . " " . $categorie->libelle . "\n";
 }
+
+echo "Test 4.b\n";
+$categorie = Categorie::find(3);
+    echo "Catégorie 3 : {$categorie->libelle}\n";
+    echo "Prestations associées :\n";
+    foreach ($categorie->prestations as $prestation) {
+        echo "- {$prestation->id} : {$prestation->libelle} ({$prestation->tarif} {$prestation->unite})\n";
+    }
+
