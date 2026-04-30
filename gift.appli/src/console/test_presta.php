@@ -21,5 +21,4 @@ try {
     echo "Unite : " . $prestation->unite . "\n";
 } catch (ModelNotFoundException $e) {
     echo "ya pas " . $id . "\n";
-    exit(1);
 }
