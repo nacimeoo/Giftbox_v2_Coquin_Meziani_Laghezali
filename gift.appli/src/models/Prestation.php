@@ -17,12 +17,4 @@ class Prestation extends Model
         return $this->belongsTo(related:Categorie::class, foreignKey:'cat_id');
     }
 
-    public function boxe() {
-        return $this->belongsToMany(Box::class, 'box2presta', 'presta_id', 'box_id')
-                    ->withPivot('quantite');
-    }
-
-    public function coffret() {
-        return $this->belongsToMany(CoffretType::class, 'coffret2presta', 'presta_id', 'coffret_id');
-    }
 }
