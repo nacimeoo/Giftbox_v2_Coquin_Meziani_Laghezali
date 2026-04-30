@@ -1,6 +1,6 @@
 <?php
 
-namespace gift\appli\src\models;
+namespace gift\appli\models;
 
 use Illuminate\Database\Eloquent\Model;
 
