@@ -12,8 +12,13 @@ $coffrets = CoffretType::all();
 
 
 foreach ($coffrets as $coffret) {
-	echo "ID : " . $coffret->id . "\n";
+    echo "ID : " . $coffret->id . "\n";
     echo "Libelle : " . $coffret->libelle . "\n";
     echo "Description : " . $coffret->description . "\n";
-    echo "them id: " . $coffret->theme_id . "\n";
+    echo "theme id: " . $coffret->theme_id . "\n";
+    echo "Prestations suggérées :\n";
+    foreach ($coffret->prestations as $prestation) {
+        echo "  - [{$prestation->id}] {$prestation->libelle} ({$prestation->tarif} {$prestation->unite})\n";
+    }
+    echo "\n";
 }
