@@ -17,4 +17,6 @@ class Prestation extends Model
         return $this->belongsTo(related:Categorie::class, foreignKey:'cat_id');
     }
 
+
+
 }
