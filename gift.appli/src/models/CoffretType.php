@@ -14,8 +14,7 @@ class CoffretType extends Model
     protected $fillable = ['id', 'libelle', 'description'];
 
     public function prestations() {
-        return $this->belongsToMany(Prestation::class, 'coffret2presta', 'coffret_id', 'presta_id')
-                    ->withPivot('coffret_id', 'presta_id');
+        return $this->belongsToMany(Prestation::class, 'coffret2presta', 'coffret_id', 'presta_id');
     }
 }
     
