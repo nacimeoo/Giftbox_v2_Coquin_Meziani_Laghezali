@@ -11,9 +11,10 @@ class Prestation extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = false;
+    protected $fillable = ['id', 'libelle', 'url', 'description', 'tarif', 'unite'];
 
     public function categorie() {
-        return $this->belongsTo(Categorie::class, 'cat_id');
+        return $this->belongsTo(related:Categorie::class, foreignKey:'cat_id');
     }
 
     public function boxe() {
