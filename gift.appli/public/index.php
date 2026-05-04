@@ -12,7 +12,7 @@ use Slim\Factory\AppFactory;
 $app = AppFactory::create();
 
 $app->addRoutingMiddleware();
-$routesFile = __DIR__ . '/../src/routes.php';
+$routesFile = __DIR__ . '/../src/conf/routes.php';
 if (file_exists($routesFile)) {
 	require $routesFile;
 }
