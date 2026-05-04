@@ -29,6 +29,8 @@ return function (Slim\App $app) {
         return $rs;
     });
 
+    return $app;
+
     
     
 };
