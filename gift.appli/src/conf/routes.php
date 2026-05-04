@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 declare(strict_types=1);
 
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -33,14 +32,3 @@ return function (Slim\App $app) {
     
     
 };
-=======
-
-declare(strict_types=1);
-
-require_once __DIR__ . '/../src/vendor/autoload.php';
-require_once __DIR__ . '/../../public/index.php';
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-
-
->>>>>>> 88254e6b45b6e3b62beb6133fdb65aadd802cce5
