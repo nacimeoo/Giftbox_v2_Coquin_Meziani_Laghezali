@@ -17,7 +17,7 @@ return function (Slim\App $app) {
         <body>
             <h1>Catégories</h1>
             <ul>
-                <li><a href="/categorie/1">1 - Soins du visage</a></li>
+                <li><a href="/categorie/1">1 - Soins</a></li>
                 <li><a href="/categorie/2">2 - Massages</a></li>
                 <li><a href="/categorie/3">3 - Coiffure</a></li>
             </ul>
