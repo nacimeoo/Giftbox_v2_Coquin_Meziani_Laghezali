@@ -35,10 +35,10 @@ return function (Slim\App $app): Slim\App {
         if ($id === 2) $label = 'Massages';
         if ($id === 3) $label = 'Coiffure';
 
-        if ($label === null) {
-            $response->getBody()->write('<p>Catégorie inconnue.</p>');
-            return $response->withStatus(404);
-        }
+        // if ($label === null) {
+        //     $response->getBody()->write('<p>Catégorie inconnue.</p>');
+        //     return $response->withStatus(404);
+        // }
 
         $html = <<<HTML
         <!DOCTYPE html>
