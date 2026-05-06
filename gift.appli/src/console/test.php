@@ -37,7 +37,7 @@ foreach ($coffrets as $coffret) {
 $id = $argv[1] ?? null;
 
 try {
-    $prestation = Prestation::findOrFail($id);
+    $prestation = Prestation::find($id);
 
     echo "ID : " . $prestation->id . "\n";
     echo "Libelle : " . $prestation->libelle . "\n";
