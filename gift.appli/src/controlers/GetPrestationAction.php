@@ -11,18 +11,8 @@ class GetPrestationAction extends AbstractAction {
     public function __invoke(Request $rq, Response $rs, array $args): Response {
         $params = $rq->getQueryParams();
         
-        if (!isset($params['id']) || $params['id'] === '') {
-            $rs->getBody()->write('<p>Paramètre manquant : id requis.</p>');
-            return $rs->withStatus(400);
-        }
-        
         $id = $params['id'];
         $prestation = Prestation::find($id);
-        
-        if (!$prestation) {
-            $rs->getBody()->write('<p>Prestation introuvable.</p>');
-            return $rs->withStatus(404);
-        }
         
         $html = "<h1>{$prestation->libelle}</h1>";
         $html .= "<p>Description : {$prestation->description}</p>";
