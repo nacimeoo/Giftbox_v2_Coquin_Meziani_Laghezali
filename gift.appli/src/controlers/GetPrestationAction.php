@@ -15,10 +15,12 @@ class GetPrestationAction extends AbstractAction
     public function __invoke(Request $rq, Response $rs, array $args): Response
     {
         $params = $rq->getQueryParams();
-        if (!isset($params['id'])) {
+
+        $id = $params['id'] ?? null;
+
+        if (is_null($id)) {
             throw new HttpBadRequestException($rq, "id manquant");
         }
-        $id = $params['id'];
         $prestation = Prestation::find($id);
         if (is_null($prestation)) {
             throw new HttpNotFoundException($rq, "Prestation n°{$id} introuvable");
