@@ -8,7 +8,9 @@ use Psr\Http\Message\ResponseInterface as Response;
 use gift\appli\models\Categorie;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Exception\HttpInternalErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 
 class GetCategorieByIdAction extends AbstractAction {
     public function __invoke(Request $rq, Response $rs, array $args): Response {
@@ -21,6 +23,8 @@ class GetCategorieByIdAction extends AbstractAction {
             $categorie = Categorie::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             throw new HttpNotFoundException($rq, "introuvable");
+        }catch(QueryException $e){
+            throw new HttpInternalErrorException($rq, "erreur de bdd");
         }
         
 
