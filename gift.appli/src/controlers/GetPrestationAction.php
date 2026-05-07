@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use gift\appli\models\Prestation;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class GetPrestationAction extends AbstractAction
 {
@@ -21,10 +22,13 @@ class GetPrestationAction extends AbstractAction
         if (is_null($id)) {
             throw new HttpBadRequestException($rq, "id manquant");
         }
-        $prestation = Prestation::find($id);
-        if (is_null($prestation)) {
-            throw new HttpNotFoundException($rq, "Prestation n°{$id} introuvable");
+        try {
+            $prestation = Prestation::findOrFail($id);
         }
+        catch (ModelNotFoundException $e) {
+            throw new HttpNotFoundException($rq, "Prestation non trouvée");
+        }
+        
 
         $html = "<h1>{$prestation->libelle}</h1>";
         $html .= "<p>Description : {$prestation->description}</p>";
