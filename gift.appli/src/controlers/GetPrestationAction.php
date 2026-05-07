@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use gift\appli\models\Prestation;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
-use Slim\Exception\HttpInternalErrorException;
+use Slim\Exception\HttpInternalServerErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 
@@ -30,7 +30,7 @@ class GetPrestationAction extends AbstractAction
         catch (ModelNotFoundException $e) {
             throw new HttpNotFoundException($rq, "Prestation non trouvée");
         }catch (QueryException $e) {
-            throw new HttpInternalErrorException($rq, "Erreurbdd");
+            throw new HttpInternalServerErrorException($rq, "Erreurbdd");
         }
         
 
