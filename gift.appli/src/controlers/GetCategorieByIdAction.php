@@ -8,6 +8,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use gift\appli\models\Categorie;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class GetCategorieByIdAction extends AbstractAction {
     public function __invoke(Request $rq, Response $rs, array $args): Response {
@@ -15,9 +16,11 @@ class GetCategorieByIdAction extends AbstractAction {
             throw new HttpBadRequestException($rq,"faut un id");
         }
         $id = (int)$args['id'];
-        $categorie = Categorie::find($id);
-        if(is_null($categorie)) {
-            throw new HttpNotFoundException($rq,"introuvable");
+        
+        try {
+            $categorie = Categorie::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            throw new HttpNotFoundException($rq, "introuvable");
         }
         
 
