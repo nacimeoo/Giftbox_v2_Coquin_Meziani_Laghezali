@@ -32,6 +32,6 @@ class GetCategorieByIdAction extends AbstractAction
         }
 
         $view = Twig::fromRequest($rq);
-        return $view->render($rs, 'categorie.twig', $categorie);
+        return $view->render($rs, 'categorie.twig', $categorie->toArray());
     }
 }
