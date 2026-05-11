@@ -8,6 +8,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use gift\appli\models\Categorie;
 use Illuminate\Database\QueryException;
 use Slim\Exception\HttpInternalServerErrorException;
+use Slim\Views\Twig;
 
 class GetCategoriesAction extends AbstractAction {
     public function __invoke(Request $rq, Response $rs, array $args): Response {
@@ -16,12 +17,9 @@ class GetCategoriesAction extends AbstractAction {
         } catch (QueryException $e) {
             throw new HttpInternalServerErrorException($rq, "Erreur bdd");
         }
+
+        $view = Twig::fromRequest($rq);
+        return $view->render($rs, 'categories.twig', ['categories' => $categories->toArray()]);
         
-        $html ="<h1>Catégories</h1>";
-        foreach ($categories as $c) {
-            $html .= "<p><a href=\"/categorie/{$c->id}\">{$c->libelle}</a></p>";
-        }
-        $rs->getBody()->write($html);
-        return $rs;
     }
 }

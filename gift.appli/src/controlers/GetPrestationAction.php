@@ -12,6 +12,7 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
+use Slim\Views\Twig;
 
 class GetPrestationAction extends AbstractAction
 {
@@ -34,11 +35,7 @@ class GetPrestationAction extends AbstractAction
         }
         
 
-        $html = "<h1>{$prestation->libelle}</h1>";
-        $html .= "<p>Description : {$prestation->description}</p>";
-        $html .= "<p>Tarif : {$prestation->tarif} €</p>";
-
-        $rs->getBody()->write($html);
-        return $rs;
+        $view = Twig::fromRequest($rq);
+        return $view->render($rs, 'prestation.twig', $prestation->toArray());
     }
 }

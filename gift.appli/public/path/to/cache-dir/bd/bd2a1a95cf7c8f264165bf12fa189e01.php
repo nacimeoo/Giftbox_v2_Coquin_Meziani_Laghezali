@@ -14,8 +14,8 @@ use Twig\Source;
 use Twig\Template;
 use Twig\TemplateWrapper;
 
-/* categorie.twig */
-class __TwigTemplate_bd04db1476f1993dfdcc4dad0ce7c5f4 extends Template
+/* prestation.twig */
+class __TwigTemplate_32e29d0a655532271c9a4e74b401d25e extends Template
 {
     private Source $source;
     /**
@@ -41,13 +41,13 @@ class __TwigTemplate_bd04db1476f1993dfdcc4dad0ce7c5f4 extends Template
         // line 1
         yield "<html>
 <head>
- <title>Categorie ";
+ <title>Presatation ";
         // line 3
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["id"] ?? null), "html", null, true);
         yield "</title>
 </head>
 <body>
-<h1>la Categorie ";
+<h1>la Presatation ";
         // line 6
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["id"] ?? null), "html", null, true);
         yield "</h1>
@@ -59,6 +59,10 @@ class __TwigTemplate_bd04db1476f1993dfdcc4dad0ce7c5f4 extends Template
         // line 8
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["description"] ?? null), "html", null, true);
         yield "</p>
+<p>";
+        // line 9
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["tarif"] ?? null), "html", null, true);
+        yield "€</p>
 </body>
 </html>";
         yield from [];
@@ -69,7 +73,7 @@ class __TwigTemplate_bd04db1476f1993dfdcc4dad0ce7c5f4 extends Template
      */
     public function getTemplateName(): string
     {
-        return "categorie.twig";
+        return "prestation.twig";
     }
 
     /**
@@ -85,11 +89,11 @@ class __TwigTemplate_bd04db1476f1993dfdcc4dad0ce7c5f4 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  60 => 8,  56 => 7,  52 => 6,  46 => 3,  42 => 1,);
+        return array (  64 => 9,  60 => 8,  56 => 7,  52 => 6,  46 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("", "categorie.twig", "C:\\xampp\\htdocs\\Giftbox_Coquin_Meziani_Laghezali\\gift.appli\\src\\views\\categorie.twig");
+        return new Source("", "prestation.twig", "C:\\xampp\\htdocs\\Giftbox_Coquin_Meziani_Laghezali\\gift.appli\\src\\views\\prestation.twig");
     }
 }
