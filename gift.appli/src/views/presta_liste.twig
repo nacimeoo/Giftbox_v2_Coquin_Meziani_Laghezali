@@ -3,8 +3,7 @@
 <ul>
     {% for p in prestations %}
         <li>
-            <strong>{{ p.libelle }}</strong> - {{ p.tarif }}€
-            <p>{{ p.description }}</p>
-        </li>
+            <a href="{{ url_for('prestation', {}, {'id': p.id}) }}"> <strong>{{ p.libelle }}</strong> - {{ p.tarif }}€</a>
+        </li>    
     {% endfor %}
 </ul>

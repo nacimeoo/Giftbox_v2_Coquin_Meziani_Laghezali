@@ -51,29 +51,23 @@ class __TwigTemplate_3f1d31c481d797d8055104f4c729823b extends Template
         foreach ($context['_seq'] as $context["_key"] => $context["p"]) {
             // line 5
             yield "        <li>
-            <strong>";
+            <a href=\"";
             // line 6
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("prestation", [], ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["p"], "id", [], "any", false, false, false, 6)]), "html", null, true);
+            yield "\"> <strong>";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["p"], "libelle", [], "any", false, false, false, 6), "html", null, true);
             yield "</strong> - ";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["p"], "tarif", [], "any", false, false, false, 6), "html", null, true);
-            yield "€
-            <p>";
-            // line 7
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["p"], "description", [], "any", false, false, false, 7), "html", null, true);
-            yield "</p>
-        </li>
+            yield "€</a>
+        </li>    
     ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['p'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 10
+        // line 9
         yield "</ul>
-
-<a href=\"";
-        // line 12
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("categories"), "html", null, true);
-        yield "\">Retour à la liste des catégories</a>";
+";
         yield from [];
     }
 
@@ -98,7 +92,7 @@ class __TwigTemplate_3f1d31c481d797d8055104f4c729823b extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  75 => 12,  71 => 10,  62 => 7,  56 => 6,  53 => 5,  49 => 4,  42 => 1,);
+        return array (  69 => 9,  56 => 6,  53 => 5,  49 => 4,  42 => 1,);
     }
 
     public function getSourceContext(): Source
