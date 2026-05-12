@@ -59,7 +59,7 @@ class __TwigTemplate_3f1d31c481d797d8055104f4c729823b extends Template
             yield "</strong> - ";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["p"], "tarif", [], "any", false, false, false, 6), "html", null, true);
             yield "€</a>
-        </li>    
+        </li>
     ";
         }
         $_parent = $context['_parent'];
@@ -92,7 +92,7 @@ class __TwigTemplate_3f1d31c481d797d8055104f4c729823b extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  75 => 12,  71 => 10,  62 => 7,  56 => 6,  53 => 5,  49 => 4,  42 => 1,);
+        return array (  69 => 9,  56 => 6,  53 => 5,  49 => 4,  42 => 1,);
     }
 
     public function getSourceContext(): Source
