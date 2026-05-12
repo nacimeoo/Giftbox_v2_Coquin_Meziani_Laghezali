@@ -69,11 +69,7 @@ class __TwigTemplate_3f1d31c481d797d8055104f4c729823b extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 10
         yield "</ul>
-
-<a href=\"";
-        // line 12
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("categories"), "html", null, true);
-        yield "\">Retour à la liste des catégories</a>";
+";
         yield from [];
     }
 
@@ -98,7 +94,7 @@ class __TwigTemplate_3f1d31c481d797d8055104f4c729823b extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  75 => 12,  71 => 10,  62 => 7,  56 => 6,  53 => 5,  49 => 4,  42 => 1,);
+        return array (  71 => 10,  62 => 7,  56 => 6,  53 => 5,  49 => 4,  42 => 1,);
     }
 
     public function getSourceContext(): Source

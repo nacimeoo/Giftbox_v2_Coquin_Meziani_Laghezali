@@ -22,14 +22,14 @@ class GetPrestaBycate extends AbstractAction{
     $id = $params['cat_id'] ?? null;
 
     if (is_null($id)) {
-        throw new HttpBadRequestException($rq, "ID de catégorie manquant");
+        throw new HttpBadRequestException($rq, "id manquant");
     }
 
     try {
         $prestations = Prestation::where('cat_id', '=', $id)->get();
         $categorie = Categorie::findOrFail($id);
     } catch (ModelNotFoundException $e) {
-        throw new HttpNotFoundException($rq, "Catégorie introuvable");
+        throw new HttpNotFoundException($rq, "Prestation non trouvée");
     } catch (QueryException $e) {
         throw new HttpInternalServerErrorException($rq, "Erreur BDD");
     }
