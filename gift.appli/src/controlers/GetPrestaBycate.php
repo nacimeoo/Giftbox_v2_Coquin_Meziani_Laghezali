@@ -19,7 +19,7 @@ class GetPrestaBycate extends AbstractAction{
     public function __invoke(Request $rq, Response $rs, array $args): Response
 {
     $params = $rq->getQueryParams();
-    $id = $params['id'] ?? null;
+    $id = $params['cat_id'] ?? null;
 
     if (is_null($id)) {
         throw new HttpBadRequestException($rq, "ID de catégorie manquant");
@@ -35,10 +35,8 @@ class GetPrestaBycate extends AbstractAction{
     }
 
     $view = Twig::fromRequest($rq);
-    return $view->render($rs, 'prestations_liste.twig', [
-        'prestations' => $prestations->toArray(),
-        'categorie'   => $categorie->toArray()
-    ]);
+    return $view->render($rs, 'presta_liste.twig', ['prestations' => $prestations->toArray(),'categorie'   => $categorie->toArray()]);
+
 }
 
 
