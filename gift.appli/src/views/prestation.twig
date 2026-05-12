@@ -7,5 +7,7 @@
 <p>{{ prestation.libelle }}</p>
 <p>{{ prestation.description }}</p>
 <p>{{ prestation.tarif }}€</p>
+
+<a href="{{ url_for('presta2', {}, {'cat_id': prestation.cat_id}) }}">retour</a>
 </body>
 </html>
