@@ -29,41 +29,54 @@ class __TwigTemplate_def6c713299bb5472511820c8a33c7fd extends Template
 
         $this->source = $this->getSourceContext();
 
-        $this->parent = false;
-
         $this->blocks = [
+            'content' => [$this, 'block_content'],
         ];
+    }
+
+    protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
+    {
+        // line 1
+        return "index.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = []): iterable
     {
         $macros = $this->macros;
-        // line 1
-        yield "<html>
-<head>
- <title>Categories</title>
-</head>
-<body>
-<h1>les Categories </h1>
-";
+        $this->parent = $this->load("index.twig", 1);
+        yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_content(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 4
+        yield "    <h1>Les Catégories</h1>
+    
+    <ul>
+        ";
         // line 7
         $context['_parent'] = $context;
         $context['_seq'] = CoreExtension::ensureTraversable(($context["categories"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["c"]) {
             // line 8
-            yield " <li><a href=\"";
+            yield "            <li><a href=\"";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("categorie", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 8)]), "html", null, true);
             yield "\">";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "libelle", [], "any", false, false, false, 8), "html", null, true);
             yield "</a></li>
- ";
+        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['c'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 10
-        yield "</body>
-</html>";
+        yield "    </ul>
+";
         yield from [];
     }
 
@@ -88,7 +101,7 @@ class __TwigTemplate_def6c713299bb5472511820c8a33c7fd extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  65 => 10,  54 => 8,  50 => 7,  42 => 1,);
+        return array (  78 => 10,  67 => 8,  63 => 7,  58 => 4,  51 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source

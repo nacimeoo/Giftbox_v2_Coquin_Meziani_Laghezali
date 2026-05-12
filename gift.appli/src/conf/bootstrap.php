@@ -7,6 +7,15 @@ use Slim\Views\TwigMiddleware;
 $app = \Slim\Factory\AppFactory::create();
 
 $twig = Twig::create(__DIR__ . '/../views', ['cache' =>'path/to/cache-dir', 'auto_reload' => true]);
+
+$twig->getEnvironment()
+->addGlobal('globals', [
+ 'css_dir'=> 'static/css',
+ 'img_dir'=> 'images/img',
+ 'menu' => [
+    ['route' => 'categories', 'text' => 'Lister les catégories']
+ ]
+]);
 $app->add(TwigMiddleware::create($app, $twig));
 
 $app->addRoutingMiddleware();

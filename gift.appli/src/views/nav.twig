@@ -1,0 +1,7 @@
+<nav>
+    <ul>
+        {% for item in globals.menu %}
+            <li><a href="{{ url_for(item.route) }}">{{ item.text }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>

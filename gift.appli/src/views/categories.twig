@@ -1,11 +1,11 @@
-<html>
-<head>
- <title>Categories</title>
-</head>
-<body>
-<h1>les Categories </h1>
-{% for c in categories %}
- <li><a href="{{ url_for('categorie', { 'id': c.id }) }}">{{ c.libelle }}</a></li>
- {% endfor %}
-</body>
-</html>
+{% extends "index.twig" %}
+
+{% block content %}
+    <h1>Les Catégories</h1>
+    
+    <ul>
+        {% for c in categories %}
+            <li><a href="{{ url_for('categorie', { 'id': c.id }) }}">{{ c.libelle }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
