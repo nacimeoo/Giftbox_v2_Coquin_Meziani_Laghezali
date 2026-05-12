@@ -29,50 +29,56 @@ class __TwigTemplate_bd04db1476f1993dfdcc4dad0ce7c5f4 extends Template
 
         $this->source = $this->getSourceContext();
 
-        $this->parent = false;
-
         $this->blocks = [
+            'content' => [$this, 'block_content'],
         ];
+    }
+
+    protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
+    {
+        // line 1
+        return "index.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = []): iterable
     {
         $macros = $this->macros;
-        // line 1
-        yield "<html>
-<head>
- <title>Categorie ";
-        // line 3
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["id"] ?? null), "html", null, true);
-        yield "</title>
-</head>
-<body>
-<h1>la Categorie ";
-        // line 6
+        $this->parent = $this->load("index.twig", 1);
+        yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_content(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 4
+        yield "    <h1>La Categorie ";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["id"] ?? null), "html", null, true);
         yield "</h1>
-<p>";
-        // line 7
+    <p>";
+        // line 5
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["libelle"] ?? null), "html", null, true);
         yield "</p>
-<p>";
-        // line 8
+    <p>";
+        // line 6
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["description"] ?? null), "html", null, true);
         yield "</p>
-<a href=\"";
-        // line 9
+    
+    <a href=\"";
+        // line 8
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("presta2"), "html", null, true);
         yield "?cat_id=";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["id"] ?? null), "html", null, true);
-        yield "\">voir les prestations</a>
-<br>
-<br>
-<a href=\"";
-        // line 12
+        yield "\">Voir les prestations</a>
+    <br><br>
+    <a href=\"";
+        // line 10
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("categories"), "html", null, true);
-        yield "\">retour</a>
-</body>
-</html>";
+        yield "\">Retour</a>
+";
         yield from [];
     }
 
@@ -97,7 +103,7 @@ class __TwigTemplate_bd04db1476f1993dfdcc4dad0ce7c5f4 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  72 => 12,  64 => 9,  60 => 8,  56 => 7,  52 => 6,  46 => 3,  42 => 1,);
+        return array (  79 => 10,  72 => 8,  67 => 6,  63 => 5,  58 => 4,  51 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source

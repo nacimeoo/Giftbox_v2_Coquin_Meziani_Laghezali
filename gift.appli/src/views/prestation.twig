@@ -1,13 +1,11 @@
-<html>
-<head>
- <title>Presatation {{ id }}</title>
-</head>
-<body>
-<h1>la Presatation {{ id }}</h1>
-<p>{{ prestation.libelle }}</p>
-<p>{{ prestation.description }}</p>
-<p>{{ prestation.tarif }}€</p>
+{% extends "index.twig" %}
 
-<a href="{{ url_for('presta2', {}, {'cat_id': prestation.cat_id}) }}">retour</a>
-</body>
-</html>
+{% block content %}
+    <h1>La Prestation {{ prestation.id }}</h1>
+    <p>{{ prestation.libelle }}</p>
+    <p>{{ prestation.description }}</p>
+    <p>{{ prestation.tarif }}€</p>
+    
+    <br>
+    <a href="{{ url_for('presta2', {}, {'cat_id': prestation.cat_id}) }}">Retour</a>
+{% endblock %}

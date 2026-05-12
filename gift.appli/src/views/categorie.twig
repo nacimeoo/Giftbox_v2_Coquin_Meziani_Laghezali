@@ -1,14 +1,11 @@
-<html>
-<head>
- <title>Categorie {{ id }}</title>
-</head>
-<body>
-<h1>la Categorie {{ id }}</h1>
-<p>{{ libelle }}</p>
-<p>{{ description }}</p>
-<a href="{{ url_for('presta2') }}?cat_id={{ id }}">voir les prestations</a>
-<br>
-<br>
-<a href="{{ url_for('categories') }}">retour</a>
-</body>
-</html>
+{% extends "index.twig" %}
+
+{% block content %}
+    <h1>La Categorie {{ id }}</h1>
+    <p>{{ libelle }}</p>
+    <p>{{ description }}</p>
+    
+    <a href="{{ url_for('presta2') }}?cat_id={{ id }}">Voir les prestations</a>
+    <br><br>
+    <a href="{{ url_for('categories') }}">Retour</a>
+{% endblock %}

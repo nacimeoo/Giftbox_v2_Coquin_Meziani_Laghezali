@@ -1,9 +1,13 @@
-<h1>Prestations de la catégorie {{ categorie.libelle }}</h1>
+{% extends "index.twig" %}
 
-<ul>
-    {% for p in prestations %}
-        <li>
-            <a href="{{ url_for('prestation', {}, {'id': p.id}) }}"> <strong>{{ p.libelle }}</strong> - {{ p.tarif }}€</a>
-        </li>    
-    {% endfor %}
-</ul>
+{% block content %}
+    <h1>Prestations de la catégorie {{ categorie.libelle }}</h1>
+
+    <ul>
+        {% for p in prestations %}
+            <li>
+                <a href="{{ url_for('prestation', {}, {'id': p.id}) }}"> {{ p.libelle }}  {{ p.tarif }}€</a>
+            </li>    
+        {% endfor %}
+    </ul>
+{% endblock %}
