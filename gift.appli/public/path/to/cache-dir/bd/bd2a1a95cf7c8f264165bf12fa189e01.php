@@ -53,15 +53,15 @@ class __TwigTemplate_32e29d0a655532271c9a4e74b401d25e extends Template
         yield "</h1>
 <p>";
         // line 7
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["libelle"] ?? null), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "libelle", [], "any", false, false, false, 7), "html", null, true);
         yield "</p>
 <p>";
         // line 8
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["description"] ?? null), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "description", [], "any", false, false, false, 8), "html", null, true);
         yield "</p>
 <p>";
         // line 9
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["tarif"] ?? null), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "tarif", [], "any", false, false, false, 9), "html", null, true);
         yield "€</p>
 </body>
 </html>";
