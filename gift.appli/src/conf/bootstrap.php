@@ -16,6 +16,7 @@ $twig->getEnvironment()
     ['route' => 'categories', 'text' => 'Lister les catégories']
  ]
 ]);
+
 $app->add(TwigMiddleware::create($app, $twig));
 
 $app->addRoutingMiddleware();
