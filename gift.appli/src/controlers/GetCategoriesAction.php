@@ -8,6 +8,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 use gift\appli\models\Categorie;
 use Illuminate\Database\QueryException;
 use Slim\Exception\HttpInternalServerErrorException;
+use Slim\Routing\RouteContext;
+use Slim\Routing\RouteParser;
 use Slim\Views\Twig;
 
 class GetCategoriesAction extends AbstractAction {
@@ -18,6 +20,9 @@ class GetCategoriesAction extends AbstractAction {
             throw new HttpInternalServerErrorException($rq, "Erreur bdd");
         }
 
+        $routescontexte=RouteContext::fromRequest($rq);
+        $routeParser=$routescontexte->getRouteParser();
+        // $url=$routeParser->urlFor('categories', ['id' => ]);
         $view = Twig::fromRequest($rq);
         return $view->render($rs, 'categories.twig', ['categories' => $categories->toArray()]);
         

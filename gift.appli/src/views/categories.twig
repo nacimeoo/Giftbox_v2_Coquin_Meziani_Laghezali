@@ -5,8 +5,7 @@
 <body>
 <h1>les Categories </h1>
 {% for c in categories %}
- <li><a href="/categorie/{{ c.id }}">{{ c.libelle }}</a>
- </li>
+ <li><a href="{{ url_for('categorie', { 'id': c.id }) }}">{{ c.libelle }}</a></li>
  {% endfor %}
 </body>
 </html>

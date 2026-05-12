@@ -1,0 +1,12 @@
+<h1>Prestations de la catégorie {{ categorie.libelle }}</h1>
+
+<ul>
+    {% for p in prestations %}
+        <li>
+            <strong>{{ p.libelle }}</strong> - {{ p.tarif }}€
+            <p>{{ p.description }}</p>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('categories') }}">Retour à la liste des catégories</a>

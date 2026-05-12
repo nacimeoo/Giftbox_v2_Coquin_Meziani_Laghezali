@@ -59,6 +59,12 @@ class __TwigTemplate_bd04db1476f1993dfdcc4dad0ce7c5f4 extends Template
         // line 8
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["description"] ?? null), "html", null, true);
         yield "</p>
+<a href=\"";
+        // line 9
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("presta2"), "html", null, true);
+        yield "?cat_id=";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["id"] ?? null), "html", null, true);
+        yield "\">voir les prestations</a>
 </body>
 </html>";
         yield from [];
@@ -85,7 +91,7 @@ class __TwigTemplate_bd04db1476f1993dfdcc4dad0ce7c5f4 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  60 => 8,  56 => 7,  52 => 6,  46 => 3,  42 => 1,);
+        return array (  64 => 9,  60 => 8,  56 => 7,  52 => 6,  46 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source

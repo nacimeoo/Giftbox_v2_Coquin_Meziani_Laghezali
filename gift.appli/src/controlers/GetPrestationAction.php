@@ -6,6 +6,7 @@ namespace gift\appli\controlers;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use gift\appli\models\Categorie;
 use gift\appli\models\Prestation;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
@@ -36,6 +37,6 @@ class GetPrestationAction extends AbstractAction
         
 
         $view = Twig::fromRequest($rq);
-        return $view->render($rs, 'prestation.twig', $prestation->toArray());
+        return $view->render($rs, 'prestation.twig', ['prestation' => $prestation->toArray()]);
     }
 }

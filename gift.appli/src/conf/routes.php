@@ -5,9 +5,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 return function (Slim\App $app): Slim\App {
-    $app->get('/categories', \gift\appli\controlers\GetCategoriesAction::class);
-    $app->get('/categorie[/{id}]', \gift\appli\controlers\GetCategorieByIdAction::class);
-    $app->get('/prestation', \gift\appli\controlers\GetPrestationAction::class);
+    $app->get('/categories', \gift\appli\controlers\GetCategoriesAction::class)->setName('categories');
+    $app->get('/categorie[/{id}]', \gift\appli\controlers\GetCategorieByIdAction::class)->setName('categorie');
+    $app->get('/prestation', \gift\appli\controlers\GetPrestationAction::class)->setName('prestation');
+    $app->get('/presta2', \gift\appli\controlers\GetPrestaBycate::class)->setName('presta2');
+
 
     return $app;
     

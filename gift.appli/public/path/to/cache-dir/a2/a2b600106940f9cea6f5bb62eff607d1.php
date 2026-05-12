@@ -51,18 +51,17 @@ class __TwigTemplate_def6c713299bb5472511820c8a33c7fd extends Template
         $context['_seq'] = CoreExtension::ensureTraversable(($context["categories"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["c"]) {
             // line 8
-            yield " <li><a href=\"/categorie/";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 8), "html", null, true);
+            yield " <li><a href=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("categorie", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 8)]), "html", null, true);
             yield "\">";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "libelle", [], "any", false, false, false, 8), "html", null, true);
-            yield "</a>
- </li>
+            yield "</a></li>
  ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['c'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 11
+        // line 10
         yield "</body>
 </html>";
         yield from [];
@@ -89,7 +88,7 @@ class __TwigTemplate_def6c713299bb5472511820c8a33c7fd extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  66 => 11,  54 => 8,  50 => 7,  42 => 1,);
+        return array (  65 => 10,  54 => 8,  50 => 7,  42 => 1,);
     }
 
     public function getSourceContext(): Source
