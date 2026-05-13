@@ -11,6 +11,7 @@ return function (Slim\App $app): Slim\App {
     $app->get('/presta2', \gift\appli\controlers\GetPrestaBycate::class)->setName('presta2');
     $app->get('/home', \gift\appli\controlers\GetHomeAction::class)->setName('home');
     $app->get('/coffret', \gift\appli\controlers\GetCoffretBytheme::class)->setName('coffret');
+    $app->get('/coffretDetaille', \gift\appli\controlers\GetCoffretDetaille::class)->setName('coffretDetaille');
 
 
     return $app;

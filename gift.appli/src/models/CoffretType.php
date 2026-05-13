@@ -20,5 +20,6 @@ class CoffretType extends Model
     public function theme(){
         return $this->belongsTo(Theme::class, 'theme_id');
     }
+
 }
     

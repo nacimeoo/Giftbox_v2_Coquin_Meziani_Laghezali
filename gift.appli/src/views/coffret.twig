@@ -11,8 +11,7 @@
                     {% for c in coffrets %}
                         {% if c.theme_id == t.id %}
                             <li>
-                                <p>{{ c.libelle }}</p>
-                                <p>{{ c.description }}</p>
+                                <a href= "{{ url_for('coffretDetaille', {}, {'id': c.id}) }}"> {{ c.libelle }}</a>
                             </li>
                         {% endif %}
                     {% endfor %}

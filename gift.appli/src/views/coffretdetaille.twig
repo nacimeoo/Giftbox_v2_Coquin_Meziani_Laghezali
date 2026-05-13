@@ -1,0 +1,14 @@
+{% extends "index.twig" %}
+
+{% block content %}
+    <h1>Le Coffret {{ coffret.libelle }}</h1>
+
+    <p>{{ coffret.description }}</p>
+
+    <h1>Prestations incluses :</h1>
+
+    {% for p in coffret.prestations %}
+        <p>{{ p.libelle }} {{ p.tarif }}€</p>
+    {% endfor %}
+
+{% endblock %}
