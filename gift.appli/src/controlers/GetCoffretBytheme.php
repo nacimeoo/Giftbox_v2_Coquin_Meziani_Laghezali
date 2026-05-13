@@ -18,8 +18,8 @@ class GetCoffretBytheme extends AbstractAction {
     public function __invoke(Request $rq, Response $rs, array $args): Response {
 
         try{
-            $coffret = CoffretType::all('libelle','description');
-            $theme = Theme::all('libelle');
+            $coffret = CoffretType::all('id', 'libelle', 'description', 'theme_id');
+            $theme = Theme::all('id', 'libelle');
         } catch (QueryException $e) {
         throw new HttpInternalServerErrorException($rq, "Erreur BDD");
     }
