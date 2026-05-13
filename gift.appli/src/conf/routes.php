@@ -10,6 +10,7 @@ return function (Slim\App $app): Slim\App {
     $app->get('/prestation', \gift\appli\controlers\GetPrestationAction::class)->setName('prestation');
     $app->get('/presta2', \gift\appli\controlers\GetPrestaBycate::class)->setName('presta2');
     $app->get('/home', \gift\appli\controlers\GetHomeAction::class)->setName('home');
+    $app->get('/coffret', \gift\appli\controlers\GetCoffretBytheme::class)->setName('coffret');
 
 
     return $app;

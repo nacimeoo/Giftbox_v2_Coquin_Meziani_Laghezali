@@ -1,0 +1,23 @@
+{% extends "index.twig" %}
+
+{% block content %}
+    <h1>Les cofffrets</h1>
+    
+    <ul>
+        {% for t in theme %}
+            <li>
+                <h2>{{ t.libelle }}</h2>
+                <ul>
+                    {% for c in coffrets %}
+                        {% if c.theme_id == t.id %}
+                            <li>
+                                <p>{{ c.libelle }}</p>
+                                <p>{{ c.description }}</p>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

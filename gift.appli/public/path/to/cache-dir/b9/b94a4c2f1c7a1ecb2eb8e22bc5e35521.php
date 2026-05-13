@@ -75,13 +75,8 @@ class __TwigTemplate_3f1d31c481d797d8055104f4c729823b extends Template
             yield "  ";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["p"], "tarif", [], "any", false, false, false, 9), "html", null, true);
             yield "€</a>
-<<<<<<< HEAD
-        </li>
-    ";
-=======
             </li>    
         ";
->>>>>>> 876f491e37a6ad5293977ef11c17ea167806f801
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['p'], $context['_parent']);
@@ -113,11 +108,7 @@ class __TwigTemplate_3f1d31c481d797d8055104f4c729823b extends Template
      */
     public function getDebugInfo(): array
     {
-<<<<<<< HEAD
-        return array (  69 => 9,  56 => 6,  53 => 5,  49 => 4,  42 => 1,);
-=======
         return array (  85 => 12,  72 => 9,  69 => 8,  65 => 7,  58 => 4,  51 => 3,  40 => 1,);
->>>>>>> 876f491e37a6ad5293977ef11c17ea167806f801
     }
 
     public function getSourceContext(): Source

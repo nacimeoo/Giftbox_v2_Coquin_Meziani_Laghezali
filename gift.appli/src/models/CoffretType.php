@@ -16,5 +16,9 @@ class CoffretType extends Model
     public function prestations() {
         return $this->belongsToMany(Prestation::class, 'coffret2presta', 'coffret_id', 'presta_id');
     }
+
+    public function theme(){
+        return $this->belongsTo(Theme::class, 'theme_id');
+    }
 }
     

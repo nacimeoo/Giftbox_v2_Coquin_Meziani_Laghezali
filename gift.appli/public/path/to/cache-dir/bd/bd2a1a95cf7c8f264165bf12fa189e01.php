@@ -29,47 +29,51 @@ class __TwigTemplate_32e29d0a655532271c9a4e74b401d25e extends Template
 
         $this->source = $this->getSourceContext();
 
-        $this->parent = false;
-
         $this->blocks = [
+            'content' => [$this, 'block_content'],
         ];
+    }
+
+    protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
+    {
+        // line 1
+        return "index.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = []): iterable
     {
         $macros = $this->macros;
-        // line 1
-        yield "<html>
-<head>
- <title>Presatation ";
-        // line 3
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["id"] ?? null), "html", null, true);
-        yield "</title>
-</head>
-<body>
-<h1>la Presatation ";
-        // line 6
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["id"] ?? null), "html", null, true);
-        yield "</h1>
-<p>";
-        // line 7
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "libelle", [], "any", false, false, false, 7), "html", null, true);
-        yield "</p>
-<p>";
-        // line 8
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "description", [], "any", false, false, false, 8), "html", null, true);
-        yield "</p>
-<p>";
-        // line 9
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "tarif", [], "any", false, false, false, 9), "html", null, true);
-        yield "€</p>
+        $this->parent = $this->load("index.twig", 1);
+        yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
+    }
 
-<a href=\"";
-        // line 11
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("presta2", [], ["cat_id" => CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "cat_id", [], "any", false, false, false, 11)]), "html", null, true);
-        yield "\">retour</a>
-</body>
-</html>";
+    // line 3
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_content(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 4
+        yield "    <h1>La Prestation ";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "libelle", [], "any", false, false, false, 4), "html", null, true);
+        yield "</h1>
+
+    <p>";
+        // line 6
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "description", [], "any", false, false, false, 6), "html", null, true);
+        yield "</p>
+    <p>";
+        // line 7
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "tarif", [], "any", false, false, false, 7), "html", null, true);
+        yield "€</p>
+    
+    <br>
+    <a href=\"";
+        // line 10
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("presta2", [], ["cat_id" => CoreExtension::getAttribute($this->env, $this->source, ($context["prestation"] ?? null), "cat_id", [], "any", false, false, false, 10)]), "html", null, true);
+        yield "\">Retour</a>
+";
         yield from [];
     }
 
@@ -94,7 +98,7 @@ class __TwigTemplate_32e29d0a655532271c9a4e74b401d25e extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  69 => 11,  64 => 9,  60 => 8,  56 => 7,  52 => 6,  46 => 3,  42 => 1,);
+        return array (  74 => 10,  68 => 7,  64 => 6,  58 => 4,  51 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source
