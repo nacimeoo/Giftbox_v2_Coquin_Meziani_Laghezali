@@ -9,6 +9,7 @@ return function (Slim\App $app): Slim\App {
     $app->get('/categorie[/{id}]', \gift\appli\controlers\GetCategorieByIdAction::class)->setName('categorie');
     $app->get('/prestation', \gift\appli\controlers\GetPrestationAction::class)->setName('prestation');
     $app->get('/presta2', \gift\appli\controlers\GetPrestaBycate::class)->setName('presta2');
+    $app->get('/home', \gift\appli\controlers\GetHomeAction::class)->setName('home');
 
 
     return $app;
