@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use gift\appli\models\CoffretType;
-use gift\appli\models\Prestation;
-use gift\appli\models\Categorie;
+use gift\core\domain\entities\CoffretType;
+use gift\core\domain\entities\Prestation;
+use gift\core\domain\entities\Categorie;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use gift\appli\utils\Eloquent;
