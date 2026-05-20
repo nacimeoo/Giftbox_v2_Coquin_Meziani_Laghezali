@@ -22,6 +22,6 @@ $app->add(TwigMiddleware::create($app, $twig));
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, false, false);
 $app = (require_once __DIR__ . '/routes.php')($app);
-Eloquent::init(__DIR__ . '/gift.db.conf.ini');
+Eloquent::init(__DIR__ . '/../.database_env');
 
 return $app;
