@@ -10,11 +10,11 @@ use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use gift\appli\utils\Eloquent;
 
-Eloquent::init(__DIR__ . '/../conf/gift.db.conf.ini');
+Eloquent::init(__DIR__ . '/../conf/.database_env');
 
 $coffrets = CoffretType::all();
 
-$filename = __DIR__ . '/../conf/gift.db.conf.ini';
+$filename = __DIR__ . '/../conf/.database_env';
 $conf = parse_ini_file($filename);
 
 $db = new DB();
