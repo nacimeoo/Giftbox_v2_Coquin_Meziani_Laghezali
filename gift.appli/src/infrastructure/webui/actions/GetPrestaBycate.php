@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace gift\appli\controlers;
+namespace gift\appli\actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use gift\appli\models\Categorie;
-use gift\appli\models\Prestation;
+use gift\core\domain\entities\Categorie;
+use gift\core\domain\entities\Prestation;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpInternalServerErrorException;

@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
-
-namespace gift\appli\controlers;
+namespace gift\appli\actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use gift\appli\models\Categorie;
-use gift\appli\models\CoffretType;
-use gift\appli\models\Theme;
+use gift\core\domain\entities\Categorie;
+use gift\core\domain\entities\CoffretType;
+use gift\core\domain\entities\Theme;
 use Illuminate\Database\QueryException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Routing\RouteContext;

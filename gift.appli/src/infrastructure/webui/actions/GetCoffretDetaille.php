@@ -1,20 +1,18 @@
 <?php
 
 declare(strict_types=1);
-
-namespace gift\appli\controlers;
-
+namespace gift\appli\actions;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use gift\appli\models\Categorie;
-use gift\appli\models\Prestation;
+use gift\core\domain\entities\Categorie;
+use gift\core\domain\entities\Prestation;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Slim\Views\Twig;
-use gift\appli\models\CoffretType;
+use gift\core\domain\entities\CoffretType;
 
 class GetCoffretDetaille extends AbstractAction
 {
