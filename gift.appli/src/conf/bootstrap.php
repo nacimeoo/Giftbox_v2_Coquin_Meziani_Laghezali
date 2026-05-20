@@ -6,7 +6,7 @@ use Slim\Views\TwigMiddleware;
 
 $app = \Slim\Factory\AppFactory::create();
 
-$twig = Twig::create(__DIR__ . '/../views', ['cache' =>'path/to/cache-dir', 'auto_reload' => true]);
+$twig = Twig::create(__DIR__ . '/../infrastructure/webui/views', ['cache' =>'path/to/cache-dir', 'auto_reload' => true]);
 
 $twig->getEnvironment()
 ->addGlobal('globals', [
