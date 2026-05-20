@@ -1,8 +1,3 @@
-MYSQL_ROOT_PASSWORD=root
-MYSQL_DATABASE=gift
-MYSQL_USER=gift
-MYSQL_PASSWORD=root
-
 driver=mysql
 host=sql.db
 database=gift
