@@ -1,21 +1,30 @@
 <?php
 declare(strict_types=1);
 
-namespace gift\appli\actions;
+namespace WebUI\Actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use gift\core\domain\entities\Categorie;
-use Illuminate\Database\QueryException;
+use ApplicationCore\Domain\Exceptions\CatalogueException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Routing\RouteContext;
 use Slim\Routing\RouteParser;
 use Slim\Views\Twig;
 
 class GetCategoriesAction extends AbstractAction {
+
+    private $catalogueService;
+    
+    public function __construct($catalogueService) {
+        $this->catalogueService = $catalogueService;
+    }
+
     public function __invoke(Request $rq, Response $rs, array $args): Response {
         try {
-            $categories = Categorie::all();
+            $categories = $this->catalogueService->getCategories();
+        } catch (CatalogueException $e) {
+            throw new HttpInternalServerErrorException($rq, $e->getMessage());
         } catch (QueryException $e) {
             throw new HttpInternalServerErrorException($rq, "Erreur bdd");
         }

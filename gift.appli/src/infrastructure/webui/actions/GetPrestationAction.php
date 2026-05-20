@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace gift\appli\actions;
+namespace WebUI\Actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -11,12 +11,19 @@ use gift\core\domain\entities\Prestation;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpInternalServerErrorException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\QueryException;
+
+use ApplicationCore\Domain\Exceptions\CatalogueException;
 use Slim\Views\Twig;
 
 class GetPrestationAction extends AbstractAction
 {
+
+    private $catalogueService;
+    
+    public function __construct($catalogueService) {
+        $this->catalogueService = $catalogueService;
+    }
+
     public function __invoke(Request $rq, Response $rs, array $args): Response
     {
         $params = $rq->getQueryParams();
@@ -27,10 +34,13 @@ class GetPrestationAction extends AbstractAction
             throw new HttpBadRequestException($rq, "id manquant");
         }
         try {
-            $prestation = Prestation::findOrFail($id);
-        }
-        catch (ModelNotFoundException $e) {
-            throw new HttpNotFoundException($rq, "Prestation non trouvée");
+
+            $prestation = $this->catalogueService->getPrestationById((string)$id);    
+
+        }catch (CatalogueException $e) {
+            if ($e->getCode() === 404) {
+                throw new HttpNotFoundException($rq, $e->getMessage());
+            }
         }catch (QueryException $e) {
             throw new HttpInternalServerErrorException($rq, "Erreurbdd");
         }

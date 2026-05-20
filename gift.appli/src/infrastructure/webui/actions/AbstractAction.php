@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace gift\appli\actions;
+namespace WebUI\Actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;

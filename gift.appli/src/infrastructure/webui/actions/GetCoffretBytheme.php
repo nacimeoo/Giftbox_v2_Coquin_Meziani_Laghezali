@@ -1,31 +1,44 @@
 <?php
 declare(strict_types=1);
-namespace gift\appli\actions;
+namespace WebUI\Actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use gift\core\domain\entities\Categorie;
 use gift\core\domain\entities\CoffretType;
 use gift\core\domain\entities\Theme;
-use Illuminate\Database\QueryException;
+
+use ApplicationCore\Domain\Exceptions\CatalogueException;
+
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Routing\RouteContext;
 use Slim\Routing\RouteParser;
 use Slim\Views\Twig;
 
 class GetCoffretBytheme extends AbstractAction {
+
+    private $catalogueService;
+    
+    public function __construct($catalogueService) {
+        $this->catalogueService = $catalogueService;
+    }
+
     public function __invoke(Request $rq, Response $rs, array $args): Response {
 
         try{
-            $coffret = CoffretType::all('id', 'libelle', 'description', 'theme_id');
-            $theme = Theme::all('id', 'libelle');
+            $coffret = $this->catalogueService->getThemeCoffret();
+        } catch (CatalogueException $e) {
+            if ($e->getCode() === 404) {
+                throw new HttpNotFoundException($rq, $e->getMessage());
+            }
+            throw new HttpInternalServerErrorException($rq, $e->getMessage());
         } catch (QueryException $e) {
-        throw new HttpInternalServerErrorException($rq, "Erreur BDD");
-    }
+            throw new HttpInternalServerErrorException($rq, "Erreur de base de données.");
+        }
 
 
         $view = Twig::fromRequest($rq);
-        return $view->render($rs, 'coffret.twig', ['theme' => $theme->toArray(),'coffrets' => $coffret->toArray()]);
+        return $view->render($rs, 'coffret.twig', ['theme' => $coffret['themes'],'coffrets' => $coffret['coffrets']]);
         
     }
 }

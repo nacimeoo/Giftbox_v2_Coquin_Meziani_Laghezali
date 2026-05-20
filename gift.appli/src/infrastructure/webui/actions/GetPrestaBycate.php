@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace gift\appli\actions;
+namespace WebUI\Actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -11,11 +11,18 @@ use gift\core\domain\entities\Prestation;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpInternalServerErrorException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\QueryException;
+use ApplicationCore\Domain\Exceptions\CatalogueException;
+
 use Slim\Views\Twig;
 
 class GetPrestaBycate extends AbstractAction{
+
+    private $catalogueService;
+    
+    public function __construct($catalogueService) {
+        $this->catalogueService = $catalogueService;
+    }
+    
     public function __invoke(Request $rq, Response $rs, array $args): Response
 {
     $params = $rq->getQueryParams();
@@ -26,18 +33,18 @@ class GetPrestaBycate extends AbstractAction{
     }
 
     try {
-        $prestations = Prestation::where('cat_id', '=', $id)->get();
-        $categorie = Categorie::findOrFail($id);
-    } catch (ModelNotFoundException $e) {
-        throw new HttpNotFoundException($rq, "Prestation non trouvée");
-    } catch (QueryException $e) {
-        throw new HttpInternalServerErrorException($rq, "Erreur BDD");
+        $categorie = $this->catalogueService->getCategorieById((int)$id);
+        $prestations = $this->catalogueService->getPrestationsbyCategorie((int)$id);
+    } catch (CatalogueException $e) {
+        if ($e->getCode() === 404) {
+            throw new HttpNotFoundException($rq, $e->getMessage());
+        }
+        throw new HttpInternalServerErrorException($rq, $e->getMessage());
     }
 
     $view = Twig::fromRequest($rq);
-    return $view->render($rs, 'presta_liste.twig', ['prestations' => $prestations->toArray(),'categorie'   => $categorie->toArray()]);
-
-}
+    return $view->render($rs, 'presta_liste.twig', ['prestations' => $prestations, 'categorie' => $categorie]);
+    }
 
 
 }

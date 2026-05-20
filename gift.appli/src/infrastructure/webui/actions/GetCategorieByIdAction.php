@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace gift\appli\actions;
+namespace WebUI\Actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -11,11 +11,18 @@ use Slim\Views\Twig;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpInternalServerErrorException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\QueryException;
+use ApplicationCore\Domain\Exceptions\CatalogueException;
+
 
 class GetCategorieByIdAction extends AbstractAction
 {
+
+    private $catalogueService;
+    
+    public function __construct($catalogueService) {
+        $this->catalogueService = $catalogueService;
+    }
+
     public function __invoke(Request $rq, Response $rs, array $args): Response
     {
         if (!isset($args['id'])) {
@@ -24,12 +31,14 @@ class GetCategorieByIdAction extends AbstractAction
         $id = (int)$args['id'];
 
         try {
-            $categorie = Categorie::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            throw new HttpNotFoundException($rq, "introuvable");
-        } catch (QueryException $e) {
+            $categorie = $this->catalogueService->getCategorieById($id);
+        } catch (CatalogueException $e) {
+            if ($e->getCode() === 404) {
+                throw new HttpNotFoundException($rq, "introuvable");
+            }
             throw new HttpInternalServerErrorException($rq, "erreur de bdd");
         }
+        
 
         $view = Twig::fromRequest($rq);
         return $view->render($rs, 'categorie.twig', $categorie->toArray());
