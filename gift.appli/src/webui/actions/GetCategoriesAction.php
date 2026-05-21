@@ -12,6 +12,7 @@ use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Routing\RouteContext;
 use Slim\Routing\RouteParser;
 use Slim\Views\Twig;
+use Illuminate\Database\QueryException;
 
 class GetCategoriesAction extends AbstractAction
 {

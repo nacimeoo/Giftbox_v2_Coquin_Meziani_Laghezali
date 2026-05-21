@@ -11,6 +11,7 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpInternalServerErrorException;
 use gift\appli\application_core\domain\Exception\CatalogueException;
 use Slim\Views\Twig;
+use Illuminate\Database\QueryException;
 use gift\appli\application_core\domain\entities\CoffretType;
 
 class GetCoffretDetaille extends AbstractAction
@@ -46,6 +47,6 @@ class GetCoffretDetaille extends AbstractAction
         
 
         $view = Twig::fromRequest($rq);
-        return $view->render($rs, 'coffretdetaille.twig', ['coffret' => $coffret->toArray()]);
+        return $view->render($rs, 'coffretdetaille.twig', ['coffret' => $coffret]);
     }
 }

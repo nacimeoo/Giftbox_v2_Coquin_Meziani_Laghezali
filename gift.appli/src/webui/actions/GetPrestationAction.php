@@ -11,7 +11,7 @@ use gift\appli\application_core\domain\entities\Prestation;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpInternalServerErrorException;
-
+use Illuminate\Database\QueryException;
 use gift\appli\application_core\domain\Exception\CatalogueException;
 use Slim\Views\Twig;
 

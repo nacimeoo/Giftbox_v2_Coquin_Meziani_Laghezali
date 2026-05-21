@@ -7,12 +7,13 @@ use Psr\Http\Message\ResponseInterface as Response;
 use gift\appli\application_core\domain\entities\Categorie;
 use gift\appli\application_core\domain\entities\CoffretType;
 use gift\appli\application_core\domain\entities\Theme;
-
+use Illuminate\Database\QueryException;
 use gift\appli\application_core\domain\Exception\CatalogueException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Routing\RouteContext;
 use Slim\Routing\RouteParser;
 use Slim\Views\Twig;
+use Slim\Exception\HttpNotFoundException;
 
 class GetCoffretBytheme extends AbstractAction {
 
@@ -25,7 +26,7 @@ class GetCoffretBytheme extends AbstractAction {
     public function __invoke(Request $rq, Response $rs, array $args): Response {
 
         try{
-            $coffret = $this->catalogueService->getThemeCoffret();
+            $coffret = $this->catalogueService->getThemesCoffrets();
         } catch (CatalogueException $e) {
             if ($e->getCode() === 404) {
                 throw new HttpNotFoundException($rq, $e->getMessage());
