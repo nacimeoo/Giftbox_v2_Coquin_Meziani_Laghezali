@@ -3,3 +3,4 @@ composer.lock
 /gift.appli/src/conf/gift.db.conf.ini
 *ini
 /gift.appli/public/path/
+*env
