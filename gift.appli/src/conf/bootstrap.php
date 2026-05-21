@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-use gift\appli\src\utils\Eloquent;
+use gift\appli\utils\Eloquent;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 

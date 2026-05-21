@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
-namespace gift\appli\src\webui\actions;
+namespace gift\appli\webui\actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use gift\core\domain\entities\Categorie;
-use gift\core\domain\entities\CoffretType;
-use gift\core\domain\entities\Theme;
+use gift\appli\application_core\domain\entities\Categorie;
+use gift\appli\application_core\domain\entities\CoffretType;
+use gift\appli\application_core\domain\entities\Theme;
 
-use gift\appli\src\application_core\domain\Exception\CatalogueException;
+use gift\appli\application_core\domain\Exception\CatalogueException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Routing\RouteContext;
 use Slim\Routing\RouteParser;
@@ -19,7 +19,7 @@ class GetCoffretBytheme extends AbstractAction {
     private $catalogueService;
     
     public function __construct($catalogueService) {
-        $this->catalogueService = $catalogueService;
+        $this->catalogueService = new \gift\appli\application_core\application\usecases\CatalogueService();
     }
 
     public function __invoke(Request $rq, Response $rs, array $args): Response {

@@ -7,7 +7,7 @@
  * @author: canals
  */
 
-namespace gift\appli\src\utils;
+namespace gift\appli\utils;
 
 use Illuminate\Database\Capsule\Manager as DB ;
 

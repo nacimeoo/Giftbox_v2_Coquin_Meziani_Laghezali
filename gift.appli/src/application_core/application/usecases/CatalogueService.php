@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace gift\appli\src\application_core\application\usecases;
+namespace gift\appli\application_core\application\usecases;
 
-use gift\core\domain\entities\Categorie;
-use gift\core\domain\entities\Prestation;
-use gift\core\domain\entities\CoffretType;
-use gift\core\domain\entities\Theme;
+use gift\appli\application_core\domain\entities\Categorie;
+use gift\appli\application_core\domain\entities\Prestation;
+use gift\appli\application_core\domain\entities\CoffretType;
+use gift\appli\application_core\domain\entities\Theme;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
-use ApplicationCore\Domain\Exceptions\CatalogueException;
+use gift\appli\application_core\domain\Exception\CatalogueException;
 
 class CatalogueService implements CatalogueInterface 
 {

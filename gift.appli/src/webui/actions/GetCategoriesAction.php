@@ -1,26 +1,30 @@
 <?php
+
 declare(strict_types=1);
 
-namespace gift\appli\src\webui\actions;
+namespace gift\appli\webui\actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use gift\core\domain\entities\Categorie;
-use gift\appli\src\application_core\domain\Exception\CatalogueException;
+use gift\appli\application_core\domain\entities\Categorie;
+use gift\appli\application_core\domain\Exception\CatalogueException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Routing\RouteContext;
 use Slim\Routing\RouteParser;
 use Slim\Views\Twig;
 
-class GetCategoriesAction extends AbstractAction {
+class GetCategoriesAction extends AbstractAction
+{
 
     private $catalogueService;
-    
-    public function __construct($catalogueService) {
-        $this->catalogueService = $catalogueService;
+
+    public function __construct($catalogueService)
+    {
+        $this->catalogueService = new \gift\appli\application_core\application\usecases\CatalogueService();
     }
 
-    public function __invoke(Request $rq, Response $rs, array $args): Response {
+    public function __invoke(Request $rq, Response $rs, array $args): Response
+    {
         try {
             $categories = $this->catalogueService->getCategories();
         } catch (CatalogueException $e) {
@@ -29,10 +33,9 @@ class GetCategoriesAction extends AbstractAction {
             throw new HttpInternalServerErrorException($rq, "Erreur bdd");
         }
 
-        $routescontexte=RouteContext::fromRequest($rq);
-        $routeParser=$routescontexte->getRouteParser();
+        $routescontexte = RouteContext::fromRequest($rq);
+        $routeParser = $routescontexte->getRouteParser();
         $view = Twig::fromRequest($rq);
-        return $view->render($rs, 'categories.twig', ['categories' => $categories->toArray()]);
-        
+        return $view->render($rs, 'categories.twig', ['categories' => $categories]);
     }
 }

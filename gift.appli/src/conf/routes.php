@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-use gift\appli\src\webui\actions\GetCategoriesAction;
-use gift\appli\src\webui\actions\GetCategorieByIdAction;
-use gift\appli\src\webui\actions\GetPrestationAction;
-use gift\appli\src\webui\actions\GetPrestaBycate;
-use gift\appli\src\webui\actions\GetHomeAction;
-use gift\appli\src\webui\actions\GetCoffretBytheme;
-use gift\appli\src\webui\actions\GetCoffretDetaille;
+use gift\appli\webui\actions\GetCategoriesAction;
+use gift\appli\webui\actions\GetCategorieByIdAction;
+use gift\appli\webui\actions\GetPrestationAction;
+use gift\appli\webui\actions\GetPrestaBycate;
+use gift\appli\webui\actions\GetHomeAction;
+use gift\appli\webui\actions\GetCoffretBytheme;
+use gift\appli\webui\actions\GetCoffretDetaille;
 
 return function (Slim\App $app): Slim\App {
     $app->get('/categories', GetCategoriesAction::class)->setName('categories');

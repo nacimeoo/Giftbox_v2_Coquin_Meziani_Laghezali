@@ -1,6 +1,6 @@
 <?php
 
-namespace gift\appli\src\application_core\application\usecases;
+namespace gift\appli\application_core\application\usecases;
 
 interface CatalogueInterface 
 {
