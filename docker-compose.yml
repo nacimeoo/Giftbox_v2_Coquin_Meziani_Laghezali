@@ -2,7 +2,6 @@
 networks:
   gift.net:
     driver: bridge
-
 services:
   app:
     build:
@@ -28,6 +27,8 @@ services:
     image: mariadb:latest
     env_file:
       - .database_env
+    volumes:
+      - mdb:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
@@ -42,3 +43,5 @@ services:
     networks:
       - gift.net
 
+volumes:
+  mdb:
