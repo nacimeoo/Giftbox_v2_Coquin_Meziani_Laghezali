@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WebUI\Actions;
+namespace gift\appli\src\webui\actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -11,8 +11,7 @@ use Slim\Views\Twig;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpInternalServerErrorException;
-use ApplicationCore\Domain\Exceptions\CatalogueException;
-
+use gift\appli\src\application_core\domain\Exception\CatalogueException;
 
 class GetCategorieByIdAction extends AbstractAction
 {

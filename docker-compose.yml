@@ -30,6 +30,8 @@ services:
       - .database_env
     ports:
       - "3306:3306"
+    volumes:
+      - maria_volume:/var/lib/mysql
     networks:
       gift.net:
         aliases:
@@ -41,4 +43,7 @@ services:
       - "8081:8080"
     networks:
       - gift.net
+
+volumes:
+  maria_volume:
 

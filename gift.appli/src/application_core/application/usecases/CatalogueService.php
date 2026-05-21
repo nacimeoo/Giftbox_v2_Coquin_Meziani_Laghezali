@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ApplicationCore\Application\UseCases;
+namespace gift\appli\src\application_core\application\usecases;
 
 use gift\core\domain\entities\Categorie;
 use gift\core\domain\entities\Prestation;
