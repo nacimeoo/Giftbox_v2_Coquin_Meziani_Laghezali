@@ -45,6 +45,9 @@ class GetPrestationAction extends AbstractAction
             throw new HttpInternalServerErrorException($rq, "Erreurbdd");
         }
         
+        if (!isset($prestation)) {
+            throw new HttpNotFoundException($rq, '0 presta');
+        }
 
         $view = Twig::fromRequest($rq);
         return $view->render($rs, 'prestation.twig', ['prestation' => $prestation]);

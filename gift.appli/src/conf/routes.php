@@ -17,7 +17,9 @@ return function (Slim\App $app): Slim\App {
     $app->get('/home', GetHomeAction::class)->setName('home');
     $app->get('/coffret', GetCoffretBytheme::class)->setName('coffret');
     $app->get('/coffretDetaille', GetCoffretDetaille::class)->setName('coffretDetaille');
+    $app->get('/box', GetBoxAction::class)->setName('box');
 
     return $app;
 };
 
+    
