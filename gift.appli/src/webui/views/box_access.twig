@@ -1,0 +1,33 @@
+{% extends "index.twig" %}
+
+{% block content %}
+    <h1>{{ box.libelle }}</h1>
+    <p>{{ box.description }}</p>
+
+    {% if box.kdo == 1 %}
+        <div>
+            <strong>Un message cadeau :</strong>
+            <p>{{ box.message_kdo }}</p>
+        </div>
+    {% endif %}
+
+    <h2>Contenu de la box :</h2>
+    <ul>
+        {% for prestation in box.prestations %}
+            <li>
+                <strong>{{ prestation.libelle }}</strong> (Quantité : {{ prestation.pivot.quantite }})
+                
+                {% if box.kdo == 0 %}
+                    - {{ prestation.tarif }} € l'unité
+                {% endif %}
+            </li>
+        {% else %}
+            <li>Cette box est vide.</li>
+        {% endfor %}
+    </ul>
+
+    {% if box.kdo == 0 %}
+        <h3>Montant total estimé : {{ box.montant }} €</h3>
+    {% endif %}
+    
+{% endblock %}

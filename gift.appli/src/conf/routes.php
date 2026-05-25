@@ -8,6 +8,8 @@ use gift\appli\webui\actions\GetPrestaBycate;
 use gift\appli\webui\actions\GetHomeAction;
 use gift\appli\webui\actions\GetCoffretBytheme;
 use gift\appli\webui\actions\GetCoffretDetaille;
+use gift\appli\webui\actions\GenererUrlAction;
+use gift\appli\webui\actions\AccessBoxAction;
 
 return function (Slim\App $app): Slim\App {
     $app->get('/categories', GetCategoriesAction::class)->setName('categories');
@@ -18,6 +20,8 @@ return function (Slim\App $app): Slim\App {
     $app->get('/coffret', GetCoffretBytheme::class)->setName('coffret');
     $app->get('/coffretDetaille', GetCoffretDetaille::class)->setName('coffretDetaille');
     $app->get('/box', GetBoxAction::class)->setName('box');
+    $app->post('/box/{id}/url', GenererUrlAction::class)->setName('generate_box_url');
+    $app->get('/box/access/{token}', AccessBoxAction::class)->setName('box_access');
 
     return $app;
 };
