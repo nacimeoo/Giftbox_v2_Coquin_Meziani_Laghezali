@@ -6,14 +6,14 @@ namespace gift\appli\webui\actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use gift\appli\application_core\domain\entities\Categorie;
-use gift\appli\application_core\domain\entities\Prestation;
 use gift\appli\application_core\domain\Exception\BoxNotFoundException;
+use gift\appli\application_core\domain\Exception\UnauthorizedAccessException;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Exception\HttpForbiddenException;
 use Slim\Exception\HttpInternalServerErrorException;
-use gift\appli\application_core\domain\Exception\CatalogueException;
 use Slim\Views\Twig;
+use Exception;
 
 class GetBoxWithPrestationsAction extends AbstractAction
 {
@@ -26,22 +26,27 @@ class GetBoxWithPrestationsAction extends AbstractAction
 
     public function __invoke(Request $rq, Response $rs, array $args): Response
     {
-        $params = $rq->getQueryParams();
-        $box=$params['box_id'] ?? null;
-        $user=$params['user_id'] ?? null;
-
-        if (is_null($box) || is_null($user)) {
-            throw new HttpBadRequestException($rq, " tu dois meetre un id");
-    }
-    try{
-        $box=$this->boxMangementService->getBoxWithPrestations($box,(string)$user);
-    }catch (BoxNotFoundException $e) {
-        if ($e->getCode() === 404) {
-            throw new HttpNotFoundException($rq, $e->getMessage());
+        $boxId = $_SESSION['current_box_id'] ?? null;
+        $userId = "user_demo"; 
+        if (!$boxId) {
+            $params = $rq->getQueryParams();
+            $boxId = $params['box_id'] ?? null;
         }
-        throw new HttpInternalServerErrorException($rq, $e->getMessage());
+        if (!$boxId) {
+            throw new HttpBadRequestException($rq, "0 box");
+        }
+
+        try {
+            $box = $this->boxMangementService->getBoxWithPrestations($boxId, $userId);
+        } catch (BoxNotFoundException $e) {
+            throw new HttpNotFoundException($rq, $e->getMessage());
+        } catch (UnauthorizedAccessException $e) {
+            throw new HttpForbiddenException($rq, $e->getMessage());
+        } catch (Exception $e) {
+            throw new HttpInternalServerErrorException($rq, $e->getMessage());
+        }
+
+        $view = Twig::fromRequest($rq);
+        return $view->render($rs, 'box_acces.twig', ['box' => $box]);
     }
-    $view = Twig::fromRequest($rq);
-    return $view->render($rs, 'box_acces.twig', ['box' => $box]);
-}
 }

@@ -3,5 +3,6 @@
         {% for item in globals.menu %}
             <li><a href="{{ url_for(item.route) }}">{{ item.text }}</a></li>
         {% endfor %}
+        <li><a href="/box/create" class="nav-link">fait ta box</a></li>
     </ul>
 </nav>

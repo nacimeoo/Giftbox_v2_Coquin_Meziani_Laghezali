@@ -1,0 +1,38 @@
+{% extends "index.twig" %}
+
+{% block content %}
+    <h2>cree ta box a 10 €</h2>
+
+    <form action="/box/create" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf }}">
+
+        <div>
+            <label for="libelle">Nom du coffre </label><br>
+            <input type="text" id="libelle" name="libelle" required>
+        </div>
+        <br>
+
+        <div>
+            <label for="description">Descrption :</label><br>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <br>
+
+        <div>
+            <label>est-ce un cadeau?</label><br>
+            <input type="radio" id="kdo_oui" name="kdo" value="1">
+            <label for="kdo_oui">Oui</label>
+            <input type="radio" id="kdo_non" name="kdo" value="0" checked>
+            <label for="kdo_non">Non</label>
+        </div>
+        <br>
+
+        <div>
+            <label for="message_kdo">Messages du cadeau:</label><br>
+            <textarea id="message_kdo" name="message_kdo"></textarea>
+        </div>
+        <br>
+
+        <button type="submit">Créer la box</button>
+    </form>
+{% endblock %}
