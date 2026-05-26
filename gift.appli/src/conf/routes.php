@@ -29,7 +29,7 @@ return function (Slim\App $app): Slim\App {
     $app->get('/box/create', GetCreateBoxAction::class)->setName('box_get');
     $app->post('/box/create', CreerBoxAction::class)->setName('box_post');
     $app->get('/box/{id}', GetBoxWithPrestationsAction::class)->setName('box');
-    $app->get('/ajoutpresta', AddPrestationAction::class)->setName('addpresta');
+    $app->post('/ajoutpresta/{id}', AddPrestationAction::class)->setName('addpresta');
 
     return $app;
 };

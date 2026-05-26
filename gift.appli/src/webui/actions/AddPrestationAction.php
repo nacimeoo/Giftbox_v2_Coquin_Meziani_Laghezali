@@ -14,15 +14,15 @@ class AddPrestationAction
 
     private BoxMangementService $boxManagementService;
 
-    public function __construct(BoxMangementService $boxManagementService)
+    public function __construct()
     {
-        $this->boxManagementService = $boxManagementService;
+        $this->boxManagementService = new BoxMangementService();
     }
 
     public function __invoke(Request $request, Response $response, array $args): Response    
     {
 
-        $prestaId = $args['presta_id'];
+        $prestaId = $args['id'];
 
         $boxId = $_SESSION['box_Actuel'] ?? null;
 
@@ -45,8 +45,5 @@ class AddPrestationAction
             throw new HttpInternalServerErrorException($request, "Erreur lors de l'ajout de la prestation : " . $e->getMessage());
         }
 
-
-        $view = Twig::fromRequest($rq);
-        return $view->render($rs, 'box_access.twig', ['box' => $box]);
     }
 }
