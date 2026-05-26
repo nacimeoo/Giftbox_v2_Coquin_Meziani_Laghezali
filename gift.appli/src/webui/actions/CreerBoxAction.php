@@ -33,9 +33,13 @@ class CreerBoxAction
                 'message_kdo' => $message_kdo
             ], $userId);
 
+            $_SESSION['box_Actuel'] = $boxId;
+
             $routeContexte = RouteContext::fromRequest($request);
             $routeParser = $routeContexte->getRouteParser();
             $url = $routeParser->urlFor('box', ['id' => $boxId]);
+
+            return $response->withHeader('Location', $url)->withStatus(302);
         } catch (\Exception $e) {
             throw new HttpInternalServerErrorException($request, "Erreur lors de la création de la box : " . $e->getMessage());
         }
