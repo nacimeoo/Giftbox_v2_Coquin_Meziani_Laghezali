@@ -7,6 +7,9 @@ use Psr\Http\Message\ResponseInterface as Response;
 use gift\appli\application_core\application\usecases\BoxMangementService;
 use Slim\Routing\RouteContext;
 use Slim\Exception\HttpInternalServerErrorException;
+use gift\appli\application_core\application\providers\CsrfTokenProvider;
+use Slim\Exception\HttpForbiddenException;
+
 
 class CreerBoxAction
 {
@@ -23,6 +26,14 @@ class CreerBoxAction
     {
 
         $data = $request->getParsedBody() ?? [];
+
+                $csrfToken = $data['csrf_token'] ?? '';
+        try {
+            (new CsrfTokenProvider())->check($csrfToken);
+        } catch (\Exception $e) {
+            throw new HttpForbiddenException($request, "Erreur de sécurité CSRF : " . $e->getMessage());
+        }
+
 
         $libelle = filter_var($data['libelle'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $description = filter_var($data['description'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
