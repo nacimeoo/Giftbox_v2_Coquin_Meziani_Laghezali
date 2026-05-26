@@ -38,7 +38,7 @@ class BoxMangementService implements BoxMangementInterface
         return $box->id;
     }
 
-    public function addPrestationToBox(string $boxId, string $prestaId, int $quantite, string $userId): void
+    public function addPrestationToBox(string $boxId, string $prestaId, string $userId): void
     {
         try {
             $box = Box::findOrFail($boxId);
@@ -56,10 +56,10 @@ class BoxMangementService implements BoxMangementInterface
         $existingPresta = $box->prestations()->where('presta_id', $prestaId)->first();
 
         if ($existingPresta) {
-            $nouvelleQte = $existingPresta->pivot->quantite + $quantite;
+            $nouvelleQte = $existingPresta->pivot->quantite + 1;
             $box->prestations()->updateExistingPivot($prestaId, ['quantite' => $nouvelleQte]);
         } else {
-            $box->prestations()->attach($prestaId, ['quantite' => $quantite]);
+            $box->prestations()->attach($prestaId, ['quantite' => 1]);
         }
 
         $this->updateBoxMontant($box);
