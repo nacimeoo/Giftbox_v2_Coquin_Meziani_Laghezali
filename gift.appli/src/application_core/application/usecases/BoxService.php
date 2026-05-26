@@ -13,21 +13,8 @@ class BoxService implements BoxInterface
         try {
             $box = Box::findOrFail($boxId);
             
-            if ($box->createur_id !== $userId) {
-                throw new Exception("Opération non autorisée.");
-            }
+            $token = $box->genererToken($userId);
 
-            if ($box->statut < 2) {
-                throw new Exception("La box doit être validée pour générer une URL.");
-            }
-
-            if (!empty($box->token)) {
-                return $box->token; 
-            }
-
-            $token = bin2hex(random_bytes(32));
-            $box->token = $token;
-            $box->statut = 3;
             $box->save();
 
             return $token;
@@ -42,10 +29,8 @@ class BoxService implements BoxInterface
         try {
             $box = Box::with('prestations')->where('token', $token)->firstOrFail();
             
-            if ($box->statut === 3) {
-                $box->statut = 4;
-                $box->save();
-            }
+            $box->Utilisee();
+            $box->save();
 
             return $box->toArray();
             

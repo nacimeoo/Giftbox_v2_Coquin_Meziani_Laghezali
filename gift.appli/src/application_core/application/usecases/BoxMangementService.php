@@ -27,7 +27,7 @@ class BoxMangementService implements BoxManagementInterface
         $box->montant = 0.00; 
         $box->kdo = $data['kdo'] ?? 0;
         $box->message_kdo = $data['message_kdo'] ?? '';
-        $box->statut = 1; 
+        $box->statut = Box::STATUT_CREEE; 
         $box->createur_id = $userId;
         $box->created_at = date('Y-m-d H:i:s');
         $box->updated_at = date('Y-m-d H:i:s');
@@ -45,13 +45,8 @@ class BoxMangementService implements BoxManagementInterface
             throw new BoxNotFoundException("La box demandée n'existe pas.");
         }
 
-        if ($box->createur_id !== $userId) {
-            throw new UnauthorizedAccessException("Vous n'avez pas le droit de modifier cette box.");
-        }
-
-        if ($box->statut >= 2) {
-            throw new BoxAlreadyValidatedException("Impossible d'ajouter des prestations : la box est déjà validée.");
-        }
+        $box->verifierProprietaire($userId);
+        $box->verifierModifiable();
 
         if (!Prestation::where('id', $prestaId)->exists()) {
             throw new \InvalidArgumentException("La prestation demandée n'existe pas.");
@@ -77,9 +72,7 @@ class BoxMangementService implements BoxManagementInterface
             throw new BoxNotFoundException("La box demandée n'existe pas.");
         }
 
-        if ($box->createur_id !== $userId) {
-            throw new UnauthorizedAccessException("Accès refusé à cette box.");
-        }
+        $box->verifierProprietaire($userId);
 
         return $box->toArray();
     }
@@ -92,20 +85,8 @@ class BoxMangementService implements BoxManagementInterface
             throw new BoxNotFoundException("La box demandée n'existe pas.");
         }
 
-        if ($box->createur_id !== $userId) {
-            throw new UnauthorizedAccessException("Vous n'avez pas les droits pour valider cette box.");
-        }
+        $box->valider($userId, $box->prestations->count());
 
-        if ($box->statut >= 2) {
-            throw new BoxAlreadyValidatedException("La box est déjà validée.");
-        }
-
-        if ($box->prestations->count() < 2) {
-            throw new NotEnoughPrestationsException("Une box doit contenir au moins 2 prestations différentes pour être validée.");
-        }
-
-        $box->statut = 2;
-        $box->updated_at = date('Y-m-d H:i:s');
         $box->save();
     }
 
