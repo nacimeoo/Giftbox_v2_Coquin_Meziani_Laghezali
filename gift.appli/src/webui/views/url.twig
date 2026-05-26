@@ -1,0 +1,12 @@
+{% extends "index.twig" %}
+
+{% block content %}
+    <h1>Box</h1>
+    
+    <p>L'URL de votre box a été générée.</p>
+        <p>Voici l'URL :</p>
+        
+        <p><a href="{{ url }}">{{ url }}</a></p>
+    
+    <a href="{{ url_for('home') }}">Retour à l'accueil</a>
+{% endblock %}

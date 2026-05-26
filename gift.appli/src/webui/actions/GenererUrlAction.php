@@ -19,11 +19,14 @@ class GenererUrlAction
         
         try {
             $token = $service->generateToken($boxId, $userId);
+
+            $routerParser = Router::fromRequest($request)->getRouteParser();
+
             
-            $url = "/box/access/" . $token; 
-            $response->getBody()->write("L'URL d'accès de votre box : <a href='$url'>$url</a>");
-            
-            return $response;
+            $url = $routerParser->urlFor('box-access', ['token' => $token]);
+
+            $view = Twig::fromRequest($request);
+            return $view->render($response, 'url.twig', ['url' => $url]);
             
         } catch (Exception $e) {
             $response->getBody()->write("Erreur : " . $e->getMessage());
