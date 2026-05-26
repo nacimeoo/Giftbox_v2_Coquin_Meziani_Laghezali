@@ -8,9 +8,10 @@ use gift\appli\application_core\domain\Exception\BoxNotFoundException;
 use gift\appli\application_core\domain\Exception\UnauthorizedAccessException;
 use gift\appli\application_core\domain\Exception\BoxAlreadyValidatedException;
 use gift\appli\application_core\domain\Exception\NotEnoughPrestationsException;
+use gift\appli\application_core\application\usecases\BoxMangementInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class BoxMangementService implements BoxManagementInterface
+class BoxMangementService implements BoxMangementInterface
 {
     public function createBox(array $data, string $userId): string
     {
@@ -77,7 +78,7 @@ class BoxMangementService implements BoxManagementInterface
         return $box->toArray();
     }
 
-    public function validateBox(string $boxId, string $userId): void
+    public function validerBox(string $boxId, string $userId): void
     {
         try {
             $box = Box::with('prestations')->findOrFail($boxId);
