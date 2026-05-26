@@ -2,6 +2,10 @@
 
 namespace gift\appli\application_core\domain\entities;
 use Illuminate\Database\Eloquent\Model;
+use gift\appli\application_core\domain\Exception\UnauthorizedAccessException;
+use gift\appli\application_core\domain\Exception\BoxAlreadyValidatedException;
+use gift\appli\application_core\domain\Exception\NotEnoughPrestationsException;
+use Exception;
 
 class Box extends Model
 {
