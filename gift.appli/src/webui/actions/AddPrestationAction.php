@@ -2,6 +2,13 @@
 
 namespace gift\appli\webui\actions;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+use gift\appli\application_core\application\usecases\BoxMangementService;
+use Slim\Exception\HttpInternalServerErrorException;
+use Slim\Routing\RouteContext;
+
+
 class AddPrestationAction
 {
 
@@ -39,6 +46,7 @@ class AddPrestationAction
         }
 
 
-
+        $view = Twig::fromRequest($rq);
+        return $view->render($rs, 'box_access.twig', ['box' => $box]);
     }
 }

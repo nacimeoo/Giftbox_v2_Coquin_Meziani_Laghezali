@@ -10,6 +10,7 @@ use gift\appli\webui\actions\GetCoffretBytheme;
 use gift\appli\webui\actions\GetCoffretDetaille;
 use gift\appli\webui\actions\GenererUrlAction;
 use gift\appli\webui\actions\AccessBoxAction;
+use gift\appli\webui\actions\AddPrestationAction;
 use gift\appli\webui\actions\GetBoxWithPrestationsAction;
 use gift\appli\webui\actions\GetCreateBoxAction;
 use gift\appli\webui\actions\CreerBoxAction;
@@ -28,6 +29,7 @@ return function (Slim\App $app): Slim\App {
     $app->get('/box/create', GetCreateBoxAction::class)->setName('box_get');
     $app->post('/box/create', CreerBoxAction::class)->setName('box_post');
     $app->get('/box/{id}', GetBoxWithPrestationsAction::class)->setName('box');
+    $app->get('/ajoutpresta', AddPrestationAction::class)->setName('addpresta');
 
     return $app;
 };

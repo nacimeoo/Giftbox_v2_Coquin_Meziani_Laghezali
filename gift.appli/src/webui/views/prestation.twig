@@ -5,7 +5,11 @@
 
     <p>{{ prestation.description }}</p>
     <p>{{ prestation.tarif }}€</p>
+        <br>
+    <button href="{{url_for('addpresta') }}" type="submit">Ajouter à la box</button>
     
     <br>
+    <br>
     <a href="{{ url_for('presta2', {}, {'cat_id': prestation.cat_id}) }}">Retour</a>
+    <br>
 {% endblock %}
