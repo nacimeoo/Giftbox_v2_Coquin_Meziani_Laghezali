@@ -19,6 +19,7 @@ class Box extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $timestamps = false;
+    public $incrementing = false;
     protected $fillable = [
         'id', 'token', 'libelle', 'description',
         'montant', 'kdo', 'message_kdo',

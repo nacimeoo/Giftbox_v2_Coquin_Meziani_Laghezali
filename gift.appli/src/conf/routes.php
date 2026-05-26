@@ -12,7 +12,8 @@ use gift\appli\webui\actions\GenererUrlAction;
 use gift\appli\webui\actions\AccessBoxAction;
 use gift\appli\webui\actions\GetBoxWithPrestationsAction;
 use gift\appli\webui\actions\GetCreateBoxAction;
-use gift\appli\webui\actions\PostCreateBoxAction;
+use gift\appli\webui\actions\CreerBoxAction;
+
 
 return function (Slim\App $app): Slim\App {
     $app->get('/categories', GetCategoriesAction::class)->setName('categories');
@@ -25,8 +26,8 @@ return function (Slim\App $app): Slim\App {
     $app->post('/box/{id}/url', GenererUrlAction::class)->setName('generate_box_url');
     $app->get('/box/access/{token}', AccessBoxAction::class)->setName('box_access');
     $app->get('/box/create', GetCreateBoxAction::class)->setName('box_get');
-    $app->post('/box/create', PostCreateBoxAction::class)->setName('box_post');
-    $app->get('/box/{id}', \gift\appli\webui\actions\GetBoxWithPrestationsAction::class);
+    $app->post('/box/create', CreerBoxAction::class)->setName('box_post');
+    $app->get('/box/{id}', GetBoxWithPrestationsAction::class)->setName('box');
 
     return $app;
 };

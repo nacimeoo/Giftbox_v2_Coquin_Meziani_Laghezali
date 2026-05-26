@@ -26,15 +26,14 @@ class GetBoxWithPrestationsAction extends AbstractAction
 
     public function __invoke(Request $rq, Response $rs, array $args): Response
     {
-        $boxId = $_SESSION['current_box_id'] ?? null;
-        $userId = "user_demo"; 
+        $boxId = $args['id'] ?? null;
+
         if (!$boxId) {
-            $params = $rq->getQueryParams();
-            $boxId = $params['box_id'] ?? null;
+            throw new HttpBadRequestException($rq, "L'identifiant de la box est manquant.");
         }
-        if (!$boxId) {
-            throw new HttpBadRequestException($rq, "0 box");
-        }
+
+        $userId = '9c025060-305b-4e47-aa94-313cdc1381f8'; 
+
 
         try {
             $box = $this->boxMangementService->getBoxWithPrestations($boxId, $userId);
@@ -47,6 +46,6 @@ class GetBoxWithPrestationsAction extends AbstractAction
         }
 
         $view = Twig::fromRequest($rq);
-        return $view->render($rs, 'box_acces.twig', ['box' => $box]);
+        return $view->render($rs, 'box_access.twig', ['box' => $box]);
     }
 }
