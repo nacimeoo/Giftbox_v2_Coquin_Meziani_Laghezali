@@ -44,7 +44,6 @@ class GetBoxWithPrestationsAction extends AbstractAction
         } catch (Exception $e) {
             throw new HttpInternalServerErrorException($rq, $e->getMessage());
         }
-        $token = (new \gift\appli\application_core\application\providers\CsrfTokenProvider())->generate();
         $view = Twig::fromRequest($rq);
         return $view->render($rs, 'box_access.twig', ['box' => $box]);
     }
