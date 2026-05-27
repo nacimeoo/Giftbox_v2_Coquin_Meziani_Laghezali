@@ -32,7 +32,7 @@ class GetBoxWithPrestationsAction extends AbstractAction
             throw new HttpBadRequestException($rq, "L'identifiant de la box est manquant.");
         }
 
-        $userId = '9c025060-305b-4e47-aa94-313cdc1381f8'; 
+        $userId = '9c025060-305b-4e47-aa94-313cdc1381f8';
 
 
         try {
@@ -44,7 +44,7 @@ class GetBoxWithPrestationsAction extends AbstractAction
         } catch (Exception $e) {
             throw new HttpInternalServerErrorException($rq, $e->getMessage());
         }
-
+        $token = (new \gift\appli\application_core\application\providers\CsrfTokenProvider())->generate();
         $view = Twig::fromRequest($rq);
         return $view->render($rs, 'box_access.twig', ['box' => $box]);
     }
