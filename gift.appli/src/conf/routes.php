@@ -14,6 +14,7 @@ use gift\appli\webui\actions\AddPrestationAction;
 use gift\appli\webui\actions\GetBoxWithPrestationsAction;
 use gift\appli\webui\actions\GetCreateBoxAction;
 use gift\appli\webui\actions\CreerBoxAction;
+use gift\appli\webui\actions\GetCurrentBoxAction;
 use gift\appli\webui\actions\ValiderBoxAction;
 
 
