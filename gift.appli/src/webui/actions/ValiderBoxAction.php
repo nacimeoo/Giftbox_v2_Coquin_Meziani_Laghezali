@@ -10,7 +10,7 @@ use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpInternalServerErrorException;
 use gift\appli\application_core\domain\Exception\NotEnoughPrestationsException;
 
-class ValidateBoxAction
+class ValiderBoxAction
 {
     private BoxMangementService $boxManagementService;
 
