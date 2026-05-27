@@ -38,7 +38,7 @@
             retour
         </a>
         {% if box.statut == 1 %}
-            <form action="{{ url_for('box_valider') }}" method="POST" >
+            <form action="{{ url_for('valider_box', {'id': box.id}) }}" method="POST" >
                 <input type="hidden" name="csrf_token" value="{{ csrf }}">
                 <button type="submit" >
                     valide
