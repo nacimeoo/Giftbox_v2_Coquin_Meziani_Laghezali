@@ -32,6 +32,7 @@ return function (Slim\App $app): Slim\App {
     $app->get('/box/{id}', GetBoxWithPrestationsAction::class)->setName('box');
     $app->post('/ajoutpresta/{id}', AddPrestationAction::class)->setName('addpresta');
     $app->post('/box/{id}/valider', ValiderBoxAction::class)->setName('valider_box');
+    $app->get('/mybox', GetCurrentBoxAction::class)->setName('my_box');
 
     return $app;
 };

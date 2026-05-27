@@ -4,6 +4,6 @@
             <li><a href="{{ url_for(item.route) }}">{{ item.text }}</a></li>
         {% endfor %}
         <li><a href="{{ url_for('box_post') }}" class="nav-link">fait ta box</a></li>
-        <li><a href="{{ url_for('box', {'id': box.id}) }}" class="nav-link">look ta box</a></li>
+        <li><a href="{{ url_for('my_box') }}" class="nav-link">look ta box</a></li>
     </ul>
 </nav>

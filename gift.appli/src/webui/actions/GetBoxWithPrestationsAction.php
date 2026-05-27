@@ -26,7 +26,7 @@ class GetBoxWithPrestationsAction extends AbstractAction
 
     public function __invoke(Request $rq, Response $rs, array $args): Response
     {
-        $boxId = $args['id'] ?? null;
+        $boxId = $_SESSION['box_Actuel'] ?? null;
 
         if (!$boxId) {
             throw new HttpBadRequestException($rq, "L'identifiant de la box est manquant.");
