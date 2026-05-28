@@ -6,25 +6,20 @@ namespace gift\appli\webui\actions;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use gift\appli\application_core\domain\entities\Categorie;
-use gift\appli\application_core\domain\entities\Prestation;
 use Slim\Exception\HttpBadRequestException;
-use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpInternalServerErrorException;
-use Illuminate\Database\QueryException;
-use gift\appli\application_core\domain\Exception\CatalogueException;
 use Slim\Views\Twig;
-use gift\appli\application_core\application\usecases\AuthnService;
-use gift\appli\application_core\application\providers\AuthnProviderInterface;
-use gift\appli\application_core\application\providers\AuthnProvider;
+use gift\appli\webui\providers\AuthProviderInterface;
+use gift\appli\webui\providers\CsrfTokenProvider;
+use Slim\Exception\HttpForbiddenException;
 
 class SigninAction extends AbstractAction
 {
 
-    private AuthnProviderInterface $authProvider;
+    private AuthProviderInterface $authProvider;
     
-    public function __construct($authnService) {
-        $this->authProvider = new AuthnProvider();
+    public function __construct($authProvider) {
+        $this->authProvider = $authProvider;
     }
 
     public function __invoke(Request $rq, Response $rs, array $args): Response
@@ -34,8 +29,13 @@ class SigninAction extends AbstractAction
             return $view->render($rs, 'signin.twig');
         }
 
-
         $data = $rq->getParsedBody() ?? [];
+        $csrfToken = $data['csrf_token'] ?? '';
+        try {
+            (new CsrfTokenProvider())->check($csrfToken);
+        } catch (\Exception $e) {
+            throw new HttpForbiddenException($rq, "Erreur de sécurité CSRF : " . $e->getMessage());
+        }
 
         $email = filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL);
         $password = $data['password'] ?? '';
