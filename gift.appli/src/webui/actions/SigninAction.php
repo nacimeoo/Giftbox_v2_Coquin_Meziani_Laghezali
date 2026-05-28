@@ -18,8 +18,8 @@ class SigninAction extends AbstractAction
 
     private AuthProvider $authProvider;
     
-    public function __construct(AuthProvider $authProvider) {
-        $this->authProvider = $authProvider;
+    public function __construct() {
+        $this->authProvider = new AuthProvider();
     }
 
     public function __invoke(Request $rq, Response $rs, array $args): Response

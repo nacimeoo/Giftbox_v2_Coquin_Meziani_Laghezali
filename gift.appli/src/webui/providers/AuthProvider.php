@@ -10,7 +10,7 @@ class AuthProvider implements AuthProviderInterface
 {
     private AuthnService $authnService;
 
-    public function __construct(AuthnService $authnService)
+    public function __construct()
     {
         $this->authnService = new AuthnService();
     }
