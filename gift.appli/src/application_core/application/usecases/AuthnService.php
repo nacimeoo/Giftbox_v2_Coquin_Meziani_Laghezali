@@ -3,8 +3,6 @@
 namespace gift\appli\application_core\application\usecases;
 
 use gift\appli\application_core\domain\entities\User;
-use PhpParser\Lexer\TokenEmulator\VoidCastEmulator;
-use PhpParser\Node\Expr\Cast\Void_;
 
 class AuthnService implements AuthnInterface
 {

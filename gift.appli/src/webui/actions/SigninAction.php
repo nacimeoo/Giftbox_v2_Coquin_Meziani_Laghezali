@@ -9,16 +9,16 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Views\Twig;
-use gift\appli\webui\providers\AuthProviderInterface;
+use gift\appli\webui\providers\AuthProvider;
 use gift\appli\webui\providers\CsrfTokenProvider;
 use Slim\Exception\HttpForbiddenException;
 
 class SigninAction extends AbstractAction
 {
 
-    private AuthProviderInterface $authProvider;
+    private AuthProvider $authProvider;
     
-    public function __construct($authProvider) {
+    public function __construct(AuthProvider $authProvider) {
         $this->authProvider = $authProvider;
     }
 
