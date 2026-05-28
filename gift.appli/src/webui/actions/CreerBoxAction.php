@@ -7,7 +7,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use gift\appli\application_core\application\usecases\BoxMangementService;
 use Slim\Routing\RouteContext;
 use Slim\Exception\HttpInternalServerErrorException;
-use gift\appli\application_core\application\providers\CsrfTokenProvider;
+use gift\appli\webui\providers\CsrfTokenProvider;
 use Slim\Exception\HttpForbiddenException;
 
 

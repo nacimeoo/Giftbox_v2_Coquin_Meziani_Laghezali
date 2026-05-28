@@ -16,6 +16,7 @@ use gift\appli\webui\actions\GetCreateBoxAction;
 use gift\appli\webui\actions\CreerBoxAction;
 use gift\appli\webui\actions\GetCurrentBoxAction;
 use gift\appli\webui\actions\ValiderBoxAction;
+use gift\appli\webui\actions\SigninAction;
 
 
 return function (Slim\App $app): Slim\App {
@@ -34,6 +35,8 @@ return function (Slim\App $app): Slim\App {
     $app->post('/ajoutpresta/{id}', AddPrestationAction::class)->setName('addpresta');
     $app->post('/box/{id}/valider', ValiderBoxAction::class)->setName('valider_box');
     $app->get('/mybox', GetCurrentBoxAction::class)->setName('my_box');
+    $app->get('/signin', SigninAction::class)->setName('signin');
+    $app->post('/signinForm', SigninAction::class)->setName('signin_post');
 
     return $app;
 };

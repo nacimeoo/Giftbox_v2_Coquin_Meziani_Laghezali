@@ -8,12 +8,6 @@ use PhpParser\Node\Expr\Cast\Void_;
 
 class AuthnService implements AuthnInterface
 {
-    // Créer le service AuthnService au sein du noyau applicatif métier. Le service propose deux
-    // cas d’utilisation :
-    // • enregistrer un nouvel utilisateur en fournissant son identifiant (@mail) et son mot de
-    // passe.
-    // • Vérifier les credentials fournis par un utilisateur qui souhaite s’authentifier.
-    // Le service propose une interface et une classe concrète implantant cette interface.
 
     public function registerUser(string $email, string $password): void
     {
