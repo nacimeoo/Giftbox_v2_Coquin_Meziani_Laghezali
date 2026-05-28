@@ -1,6 +1,6 @@
 <?php
 
-namespace gift\appli\application_core\application\providers;
+namespace gift\appli\webui\providers;
 
 use Exception;
 
