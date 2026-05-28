@@ -9,6 +9,7 @@ use Slim\Routing\RouteContext;
 use Slim\Exception\HttpInternalServerErrorException;
 use gift\appli\webui\providers\CsrfTokenProvider;
 use Slim\Exception\HttpForbiddenException;
+use gift\appli\webui\providers\AuthProvider;
 
 
 class CreerBoxAction
@@ -16,10 +17,12 @@ class CreerBoxAction
 
 
     private BoxMangementService $boxManagementService;
+    private AuthProvider $authProvider;
 
     public function __construct()
     {
         $this->boxManagementService = new BoxMangementService();
+        $this->authProvider = new AuthProvider();
     }
 
     public function __invoke(Request $request, Response $response, array $args): Response    
@@ -34,13 +37,18 @@ class CreerBoxAction
             throw new HttpForbiddenException($request, "Erreur de sécurité CSRF : " . $e->getMessage());
         }
 
+        $user = $this->authProvider->getSignedInUser();
 
+        if (!$user) {
+            throw new HttpForbiddenException($request, "Vous devez être connecté pour créer une box.");
+        }
+
+        $userId = $user['id'];
         $libelle = filter_var($data['libelle'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $description = filter_var($data['description'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $kdo = isset($data['kdo']) ? 1 : 0;
         $message_kdo = filter_var($data['message_kdo'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
-        $userId = '9c025060-305b-4e47-aa94-313cdc1381f8';
 
         try {
             $boxId = $this->boxManagementService->createBox([
