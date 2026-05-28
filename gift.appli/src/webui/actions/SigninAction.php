@@ -26,7 +26,10 @@ class SigninAction extends AbstractAction
     {
         if ($rq->getMethod() === 'GET') {
             $view = Twig::fromRequest($rq);
-            return $view->render($rs, 'signin.twig');
+            $token = (new CsrfTokenProvider())->generate();
+            return $view->render($rs, 'signin.twig',[
+            'csrf' => $token
+        ]);
         }
 
         $data = $rq->getParsedBody() ?? [];
@@ -46,7 +49,7 @@ class SigninAction extends AbstractAction
         try {
             $this->authProvider->signIn($email, $password);
 
-            return $rs->withHeader('Location', '/')->withStatus(302);
+            return $rs->withHeader('Location', '/categories')->withStatus(302);
 
         } catch (\Exception $e) {
             throw new HttpInternalServerErrorException($rq, "Erreur lors de l'authentification : " . $e->getMessage());
