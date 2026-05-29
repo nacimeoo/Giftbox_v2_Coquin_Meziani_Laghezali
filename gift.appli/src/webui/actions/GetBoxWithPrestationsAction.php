@@ -32,8 +32,11 @@ class GetBoxWithPrestationsAction extends AbstractAction
             throw new HttpBadRequestException($rq, "L'identifiant de la box est manquant.");
         }
 
-        $userId = '9c025060-305b-4e47-aa94-313cdc1381f8';
+        $userId = $_SESSION['user']['id'] ?? null;
 
+        if (!$userId) {
+            throw new HttpBadRequestException($rq, "L'identifiant de l'utilisateur est manquant.");
+        }
 
         try {
             $box = $this->boxMangementService->getBoxWithPrestations($boxId, $userId);
