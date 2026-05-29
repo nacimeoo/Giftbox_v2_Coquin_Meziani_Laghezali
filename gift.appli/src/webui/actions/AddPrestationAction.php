@@ -7,16 +7,18 @@ use Psr\Http\Message\ResponseInterface as Response;
 use gift\appli\application_core\application\usecases\BoxMangementService;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Routing\RouteContext;
+use gift\appli\webui\providers\AuthProvider;
 
 
 class AddPrestationAction
 {
 
     private BoxMangementService $boxManagementService;
-
+    private AuthProvider $authProvider;
     public function __construct()
     {
         $this->boxManagementService = new BoxMangementService();
+        $this->authProvider = new AuthProvider();   
     }
 
     public function __invoke(Request $request, Response $response, array $args): Response    
@@ -30,7 +32,7 @@ class AddPrestationAction
             throw new HttpInternalServerErrorException($request, "Aucune box sélectionnée pour ajouter la prestation.");
         }
 
-        $userId = '9c025060-305b-4e47-aa94-313cdc1381f8';
+        $userId = $this->authProvider->getSignedInUser()['id'] ?? null;
 
         try {
             $this->boxManagementService->addPrestationToBox($boxId, $prestaId, $userId);

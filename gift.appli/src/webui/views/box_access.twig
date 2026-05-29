@@ -39,6 +39,17 @@
             </form>
 
         {% endif %}
+        {% if box.statut == 2 %}
+            <form action="{{ url_for('generate_box_url', {'id': box.id}) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf }}">
+                <button type="submit">
+                    genere url
+                </button>
+            </form>
+        {% endif %}
+        {% if box.statut == 3 %}
+            <p>lien dispo et livrer</p>
+        {% endif %}
         <br>
         <a href="{{ url_for('categories') }}">
             retour

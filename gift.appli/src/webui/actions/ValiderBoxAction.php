@@ -9,20 +9,23 @@ use Slim\Routing\RouteContext;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpInternalServerErrorException;
 use gift\appli\application_core\domain\Exception\NotEnoughPrestationsException;
+use gift\appli\webui\providers\AuthProvider;
 
 class ValiderBoxAction
 {
     private BoxMangementService $boxManagementService;
+    private AuthProvider $authProvider;
 
     public function __construct()
     {
         $this->boxManagementService = new BoxMangementService();
+        $this->authProvider = new AuthProvider();
     }
 
     public function __invoke(Request $request, Response $response, array $args): Response    
     {
         $boxId = $args['id'];
-        $userId = '9c025060-305b-4e47-aa94-313cdc1381f8';
+        $userId = $this->authProvider->getSignedInUser()['id'] ?? null;
 
         try {
             $this->boxManagementService->validerBox($boxId, $userId);
