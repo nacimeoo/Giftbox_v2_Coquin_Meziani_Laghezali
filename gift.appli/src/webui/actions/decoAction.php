@@ -1,20 +1,23 @@
 <?php
+
+namespace gift\appli\webui\actions;
+
+// 👇 On ajoute les imports PSR-7 qui manquaient pour éviter les erreurs PHP
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Routing\RouteContext;
 
-class decoAction
+class decoAction extends AbstractAction
 {
-    public function __invoke($request, $response, $args)
+    public function __invoke(Request $request, Response $response, array $args): Response
     {
-        session_start(); 
-        session_unset(); 
-        session_destroy(); 
-
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        session_unset();
+        session_destroy();
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-        $url = $routeParser->urlFor('box_post');
+        $url = $routeParser->urlFor('home');
         return $response->withHeader('Location', $url)->withStatus(302);
     }
 }
-
-
-exit();
-?>

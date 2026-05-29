@@ -3,6 +3,7 @@ declare(strict_types=1);
 use gift\appli\utils\Eloquent;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
+use gift\appli\webui\providers\AuthProvider;
 
 $app = \Slim\Factory\AppFactory::create();
 
@@ -16,6 +17,9 @@ $twig->getEnvironment()
     ['route' => 'categories', 'text' => 'Lister les catégories']
  ]
 ]);
+
+$auth = new AuthProvider();
+$twig->getEnvironment()->addGlobal('user', $auth->getSignedInUser());
 
 $app->add(TwigMiddleware::create($app, $twig));
 

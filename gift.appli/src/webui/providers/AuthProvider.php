@@ -20,7 +20,7 @@ class AuthProvider implements AuthProviderInterface
         try {
             $userid = $this->authnService->byCredentials($email, $password);
             $user = User::find($userid);
-            $_SESSION['user'] = ['id' => $user->id, 'email' => $user->email, 'role' => $user->role];
+            $_SESSION['user'] = ['id' => $user->id, 'email' => $user->user_id, 'role' => $user->role];
         } catch (Exception) {
             throw new Exception("mauvais email ou mot de passe");
         }
