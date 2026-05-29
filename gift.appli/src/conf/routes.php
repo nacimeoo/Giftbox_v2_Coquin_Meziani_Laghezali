@@ -17,6 +17,7 @@ use gift\appli\webui\actions\CreerBoxAction;
 use gift\appli\webui\actions\GetCurrentBoxAction;
 use gift\appli\webui\actions\ValiderBoxAction;
 use gift\appli\webui\actions\SigninAction;
+use gift\appli\webui\actions\decoAction;
 
 
 return function (Slim\App $app): Slim\App {
@@ -37,6 +38,8 @@ return function (Slim\App $app): Slim\App {
     $app->get('/mybox', GetCurrentBoxAction::class)->setName('my_box');
     $app->get('/signin', SigninAction::class)->setName('signin');
     $app->post('/signinForm', SigninAction::class)->setName('signin_post');
+    $app->get('/deco', decoAction::class)->setName('deco');
+    
 
     return $app;
 };
