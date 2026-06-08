@@ -19,7 +19,6 @@ use gift\appli\webui\actions\ValiderBoxAction;
 use gift\appli\webui\actions\SigninAction;
 use gift\appli\webui\actions\decoAction;
 
-
 return function (Slim\App $app): Slim\App {
     $app->get('/categories', GetCategoriesAction::class)->setName('categories');
     $app->get('/categorie[/{id}]', GetCategorieByIdAction::class)->setName('categorie');
@@ -39,6 +38,8 @@ return function (Slim\App $app): Slim\App {
     $app->get('/signin', SigninAction::class)->setName('signin');
     $app->post('/signinForm', SigninAction::class)->setName('signin_post');
     $app->get('/deco', decoAction::class)->setName('deco');
+
+    $app->get('/api/categories', \gift\appli\api\action\GetCategoriesAction::class)->setName('api_categories');
     
 
     return $app;
