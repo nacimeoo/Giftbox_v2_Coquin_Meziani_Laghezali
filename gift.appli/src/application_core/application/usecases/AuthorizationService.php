@@ -7,7 +7,7 @@ use Ramsey\Uuid\Uuid;
 class AuthorizationService implements AuthorizationInterface
 {
 
-    public function isGranted(array $user_profile, string $operation, Uuid $ressource_id): bool
+    public function isGranted(array $user_profile, string $operation, ?Uuid $ressource_id = null): bool
     {
         $user_role = $user_profile['role'] ?? null;
         $user_id = $user_profile['id'] ?? null;

@@ -10,6 +10,9 @@ use Slim\Exception\HttpInternalServerErrorException;
 use gift\appli\webui\providers\CsrfTokenProvider;
 use Slim\Exception\HttpForbiddenException;
 use gift\appli\webui\providers\AuthProvider;
+use gift\appli\application_core\application\authorization\AuthorizationInterface;
+use gift\appli\application_core\application\authorization\AuthorizationService;
+use Ramsey\Uuid\Uuid;
 
 
 class CreerBoxAction
@@ -18,11 +21,13 @@ class CreerBoxAction
 
     private BoxMangementService $boxManagementService;
     private AuthProvider $authProvider;
+    private AuthorizationService $authService;
 
     public function __construct()
     {
         $this->boxManagementService = new BoxMangementService();
         $this->authProvider = new AuthProvider();
+        $this->authService = new AuthorizationService();
     }
 
     public function __invoke(Request $request, Response $response, array $args): Response    
@@ -38,6 +43,14 @@ class CreerBoxAction
         }
 
         $user = $this->authProvider->getSignedInUser();
+        $userId = $this->authProvider->getSignedInUser()['id'] ?? null;
+        $role = $this->authProvider->getSignedInUser()['role'] ?? null;
+        
+
+        if (!$this->authService->isGranted(['id' => $userId, 'role' => $role], AuthorizationInterface::OPERATION_CREER_BOX, null)) {
+            throw new HttpForbiddenException($request, "Vous n'avez pas les permissions nécessaires pour créer cette box.");
+        }
+
 
         if (!$user) {
             throw new HttpForbiddenException($request, "Vous devez être connecté pour créer une box.");

@@ -14,14 +14,22 @@ use Slim\Exception\HttpForbiddenException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Views\Twig;
 use Exception;
+use gift\appli\application_core\application\authorization\AuthorizationInterface;
+use gift\appli\application_core\application\authorization\AuthorizationService;
+use gift\appli\webui\providers\AuthProvider;
+use Ramsey\Uuid\Uuid;
 
 class GetBoxWithPrestationsAction extends AbstractAction
 {
     private $boxMangementService;
+    private AuthorizationService $authService;
+    private AuthProvider $authProvider;
 
     public function __construct()
     {
         $this->boxMangementService = new \gift\appli\application_core\application\usecases\BoxMangementService();
+        $this->authService = new AuthorizationService();
+        $this->authProvider = new AuthProvider();
     }
 
     public function __invoke(Request $rq, Response $rs, array $args): Response
@@ -33,6 +41,15 @@ class GetBoxWithPrestationsAction extends AbstractAction
         }
 
         $userId = $_SESSION['user']['id'] ?? null;
+
+        $userId = $this->authProvider->getSignedInUser()['id'] ?? null;
+        $role = $this->authProvider->getSignedInUser()['role'] ?? null;
+
+        $boxUuid = Uuid::fromString($boxId);
+
+        if (!$this->authService->isGranted(['id' => $userId, 'role' => $role], AuthorizationInterface::OPERATION_VIEW_BOX, $boxUuid)) {
+            throw new HttpForbiddenException($rq, "Vous n'avez pas les permissions nécessaires pour visualiser cette box.");
+        }
 
         if (!$userId) {
             throw new HttpBadRequestException($rq, "L'identifiant de l'utilisateur est manquant.");

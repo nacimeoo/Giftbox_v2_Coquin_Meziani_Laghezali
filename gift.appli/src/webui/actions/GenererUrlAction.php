@@ -10,15 +10,30 @@ use Slim\Views\Twig;
 use Slim\Routing\RouteContext; 
 use Slim\Exception\HttpForbiddenException;
 use Exception;
+use gift\appli\webui\providers\AuthProvider;
+use gift\appli\application_core\application\authorization\AuthorizationInterface;
+use gift\appli\application_core\application\authorization\AuthorizationService;
+use Ramsey\Uuid\Uuid;
 
 class GenererUrlAction
 {
+    private AuthProvider $authProvider;
+    private AuthorizationService $authService;
+
+    public function __construct()
+    {
+        $this->authProvider = new AuthProvider();
+        $this->authService = new AuthorizationService();
+    }
+
     public function __invoke(Request $request, Response $response, array $args): Response
     {
         $boxId = $args['id'];
         $token = (new CsrfTokenProvider())->generate();
         $data = $request->getParsedBody();
         $csrfToken = $data['csrf_token'] ?? '';
+
+
         try {
             (new CsrfTokenProvider())->check($csrfToken);
         } catch (Exception $e) {
@@ -26,6 +41,15 @@ class GenererUrlAction
         }
 
         $userId = $_SESSION['user']['id'] ?? null;
+
+        $userId = $this->authProvider->getSignedInUser()['id'] ?? null;
+        $role = $this->authProvider->getSignedInUser()['role'] ?? null;
+        $boxUuid = Uuid::fromString($boxId);
+        
+
+        if (!$this->authService->isGranted(['id' => $userId, 'role' => $role], AuthorizationInterface::OPERATION_GENERER_URL, $boxUuid)) {
+            throw new HttpForbiddenException($request, "Vous n'avez pas les permissions nécessaires pour générer cette URL.");
+        }
 
         $service = new BoxService();
 

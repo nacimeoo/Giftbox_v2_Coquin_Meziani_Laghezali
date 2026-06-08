@@ -12,5 +12,5 @@ interface AuthorizationInterface
     public const OPERATION_ADD_PRESTA = 'add_presta';
     public const OPERATION_GENERER_URL = 'generer_url';
 
-    public function isGranted(array $user_profile, string $operation, Uuid $ressource_id): bool;
+    public function isGranted(array $user_profile, string $operation, ?Uuid $ressource_id = null): bool;
 }
