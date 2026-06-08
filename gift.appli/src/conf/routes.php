@@ -40,6 +40,7 @@ return function (Slim\App $app): Slim\App {
     $app->get('/deco', decoAction::class)->setName('deco');
 
     $app->get('/api/categories', \gift\appli\api\action\GetCategoriesAction::class)->setName('api_categories');
+    $app->get('/api/boxes/{id}', \gift\appli\api\action\GetBoxAction::class)->setName('api_box');
     
 
     return $app;
