@@ -11,8 +11,8 @@ use Slim\Routing\RouteContext;
 use Slim\Exception\HttpForbiddenException;
 use Exception;
 use gift\appli\webui\providers\AuthProvider;
-use gift\appli\application_core\application\authorization\AuthorizationInterface;
-use gift\appli\application_core\application\authorization\AuthorizationService;
+use gift\appli\application_core\application\usecases\AuthorizationInterface;
+use gift\appli\application_core\application\usecases\AuthorizationService;
 use Ramsey\Uuid\Uuid;
 
 class GenererUrlAction
@@ -28,8 +28,7 @@ class GenererUrlAction
 
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-        $boxId = $args['id'];
-        $token = (new CsrfTokenProvider())->generate();
+        $boxId = $args['id'];   
         $data = $request->getParsedBody();
         $csrfToken = $data['csrf_token'] ?? '';
 
@@ -61,11 +60,12 @@ class GenererUrlAction
 
 
             $url1 = $routeParser->urlFor('box_access', ['token' => $token]);
-            $url2=$request->getUri()->getScheme() . '://' . $request->getUri()->getHost() . $url1;
-            $url3= $url1 .$url2;
+            $url2=  $request->getUri();
+            $url3= $url2->getScheme() . '://' . $url2->getHost();;
+            $url4= $url3 .$url1;
 
             $view = Twig::fromRequest($request);
-            return $view->render($response, 'url.twig', ['url' => $url3]);
+            return $view->render($response, 'url.twig', ['url' => $url4]);
         } catch (Exception $e) {
             $response->getBody()->write("Erreur : " . $e->getMessage());
             return $response->withStatus(400);
