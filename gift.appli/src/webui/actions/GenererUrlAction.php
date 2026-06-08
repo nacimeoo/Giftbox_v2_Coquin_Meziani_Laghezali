@@ -61,7 +61,7 @@ class GenererUrlAction
 
             $url1 = $routeParser->urlFor('box_access', ['token' => $token]);
             $url2=  $request->getUri();
-            $url3= $url2->getScheme() . '://' . $url2->getHost();;
+            $url3= $url2->getScheme() . '://' . $url2->getAuthority();;
             $url4= $url3 .$url1;
 
             $view = Twig::fromRequest($request);
