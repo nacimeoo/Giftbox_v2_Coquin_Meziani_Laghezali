@@ -50,6 +50,9 @@
         {% if box.statut == 3 %}
             <p>lien dispo et livrer</p>
         {% endif %}
+        {% if box.statut == 4 %}
+            <p>box utiliser</p>
+        {% endif %}
         <br>
         <a href="{{ url_for('categories') }}">
             retour

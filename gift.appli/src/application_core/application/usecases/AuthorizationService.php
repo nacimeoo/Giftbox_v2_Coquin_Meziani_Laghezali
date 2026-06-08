@@ -19,7 +19,7 @@ class AuthorizationService implements AuthorizationInterface
             case self::OPERATION_VALIDER_BOX:
             case self::OPERATION_ADD_PRESTA:
             case self::OPERATION_GENERER_URL:
-                return $this->isAdmin($user_profile) && $this->isOwner($user_id, $ressource_id);
+                return $this->isAdmin($user_profile) || $this->isOwner($user_id, $ressource_id);
 
             default:
                 return false;

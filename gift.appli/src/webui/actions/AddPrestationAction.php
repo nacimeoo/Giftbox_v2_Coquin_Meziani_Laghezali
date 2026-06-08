@@ -8,8 +8,8 @@ use gift\appli\application_core\application\usecases\BoxMangementService;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Routing\RouteContext;
 use gift\appli\webui\providers\AuthProvider;
-use gift\appli\application_core\application\authorization\AuthorizationInterface;
-use gift\appli\application_core\application\authorization\AuthorizationService;
+use gift\appli\application_core\application\usecases\AuthorizationInterface;
+use gift\appli\application_core\application\usecases\AuthorizationService;
 use Slim\Exception\HttpForbiddenException;
 use Ramsey\Uuid\Uuid;
 

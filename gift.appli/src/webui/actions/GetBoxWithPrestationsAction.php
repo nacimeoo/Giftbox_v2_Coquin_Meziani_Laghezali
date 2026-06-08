@@ -45,7 +45,9 @@ class GetBoxWithPrestationsAction extends AbstractAction
 
         $userId = $this->authProvider->getSignedInUser()['id'] ?? null;
         $role = $this->authProvider->getSignedInUser()['role'] ?? null;
-
+        if (!$userId) {
+            throw new HttpForbiddenException($rq, "connecte toi stv acceder a ta boxe.");
+        }
         $boxUuid = Uuid::fromString($boxId);
 
         if (!$this->authService->isGranted(['id' => $userId, 'role' => $role], AuthorizationInterface::OPERATION_VIEW_BOX, $boxUuid)) {
