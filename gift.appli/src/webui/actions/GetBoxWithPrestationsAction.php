@@ -14,10 +14,11 @@ use Slim\Exception\HttpForbiddenException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Views\Twig;
 use Exception;
-use gift\appli\application_core\application\authorization\AuthorizationInterface;
-use gift\appli\application_core\application\authorization\AuthorizationService;
+use gift\appli\application_core\application\usecases\AuthorizationInterface;
+use gift\appli\application_core\application\usecases\AuthorizationService;
 use gift\appli\webui\providers\AuthProvider;
 use Ramsey\Uuid\Uuid;
+use gift\appli\webui\providers\CsrfTokenProvider;
 
 class GetBoxWithPrestationsAction extends AbstractAction
 {
@@ -64,7 +65,8 @@ class GetBoxWithPrestationsAction extends AbstractAction
         } catch (Exception $e) {
             throw new HttpInternalServerErrorException($rq, $e->getMessage());
         }
+        $csrfToken = (new CsrfTokenProvider())->generate();
         $view = Twig::fromRequest($rq);
-        return $view->render($rs, 'box_access.twig', ['box' => $box]);
+        return $view->render($rs, 'box_access.twig', ['box' => $box, 'csrf' => $csrfToken]);
     }
 }

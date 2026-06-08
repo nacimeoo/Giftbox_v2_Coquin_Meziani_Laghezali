@@ -10,9 +10,8 @@ use Slim\Exception\HttpInternalServerErrorException;
 use gift\appli\webui\providers\CsrfTokenProvider;
 use Slim\Exception\HttpForbiddenException;
 use gift\appli\webui\providers\AuthProvider;
-use gift\appli\application_core\application\authorization\AuthorizationInterface;
-use gift\appli\application_core\application\authorization\AuthorizationService;
-use Ramsey\Uuid\Uuid;
+use gift\appli\application_core\application\usecases\AuthorizationInterface;
+use gift\appli\application_core\application\usecases\AuthorizationService;
 
 
 class CreerBoxAction
@@ -43,17 +42,15 @@ class CreerBoxAction
         }
 
         $user = $this->authProvider->getSignedInUser();
+        if (!$user) {
+            throw new HttpForbiddenException($request, "connecte toi stv cree ta box");
+        }
         $userId = $this->authProvider->getSignedInUser()['id'] ?? null;
         $role = $this->authProvider->getSignedInUser()['role'] ?? null;
         
 
         if (!$this->authService->isGranted(['id' => $userId, 'role' => $role], AuthorizationInterface::OPERATION_CREER_BOX, null)) {
             throw new HttpForbiddenException($request, "Vous n'avez pas les permissions nécessaires pour créer cette box.");
-        }
-
-
-        if (!$user) {
-            throw new HttpForbiddenException($request, "Vous devez être connecté pour créer une box.");
         }
 
         $userId = $user['id'];

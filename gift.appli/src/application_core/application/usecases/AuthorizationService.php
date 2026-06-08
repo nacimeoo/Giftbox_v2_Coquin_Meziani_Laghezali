@@ -1,7 +1,7 @@
 <?php
 
-namespace gift\appli\application_core\application\authorization;
-
+namespace gift\appli\application_core\application\usecases;
+use gift\appli\application_core\application\usecases\AuthorizationInterface;
 use Ramsey\Uuid\Uuid;
 
 class AuthorizationService implements AuthorizationInterface

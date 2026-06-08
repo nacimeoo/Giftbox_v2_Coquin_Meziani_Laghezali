@@ -1,6 +1,6 @@
 <?php
 
-namespace gift\appli\application_core\application\authorization;
+namespace gift\appli\application_core\application\usecases;
 
 use Ramsey\Uuid\Uuid;
 
