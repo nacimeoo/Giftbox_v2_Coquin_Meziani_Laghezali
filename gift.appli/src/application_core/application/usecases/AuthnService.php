@@ -12,7 +12,7 @@ class AuthnService implements AuthnInterface
         try{
 
         if (User::where('user_id', $email)->exists()) {
-            throw new \Exception("Un utilisateur avec cet email existe déjà.");
+            throw new \InvalidArgumentException("Un utilisateur avec cet email existe déjà.");
         }
 
             $user = new User();
@@ -31,27 +31,27 @@ class AuthnService implements AuthnInterface
             $user->save();   
 
         }catch(\Exception $e){
-            throw new \Exception("Erreur lors de l'enregistrement de l'utilisateur : " . $e->getMessage());
+            throw new \InvalidArgumentException("Erreur lors de l'enregistrement de l'utilisateur : " . $e->getMessage());
         }
     }
 
-    public function byCredentials(string $email, string $password): String
+    public function byCredentials(string $email, string $password): User
     {
         try {
             $user = User::where('user_id', $email)->firstOrFail();
 
             if (!$user) {
-                throw new \Exception("login ou mot de passe incorrect.");
+                throw new \InvalidArgumentException("Email ou mot de passe incorrect.");
             }
 
             if (!password_verify($password, $user->password)) {
-                throw new \Exception("login ou mot de passe incorrect.");
+                throw new \InvalidArgumentException("Email ou mot de passe incorrect.");
             }
 
-            return $user->id;
+            return $user;
 
         } catch (\Exception $e) {
-            throw new \Exception("Erreur lors de la vérification des credentials : " . $e->getMessage());
+            throw new \InvalidArgumentException("Erreur lors de la vérification des credentials : " . $e->getMessage());
         }
     }
 

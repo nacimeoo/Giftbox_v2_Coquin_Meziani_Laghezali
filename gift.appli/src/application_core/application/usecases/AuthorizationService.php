@@ -35,7 +35,11 @@ class AuthorizationService implements AuthorizationInterface
 
     public function isOwner(string $user_id, Uuid $ressource_id): bool
     {
-        $box = \gift\appli\application_core\domain\entities\Box::where('id', $ressource_id->toString())->first();
+        try {
+            $box = \gift\appli\application_core\domain\entities\Box::where('id', $ressource_id->toString())->firstOrFail();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return false;
+        }
         return $box !== null && $box->user_id === $user_id;
         
     }

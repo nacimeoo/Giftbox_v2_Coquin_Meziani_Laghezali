@@ -3,8 +3,6 @@ declare(strict_types=1);
 namespace gift\appli\webui\providers;
 
 use gift\appli\application_core\application\usecases\AuthnService;
-use Exception;
-use gift\appli\application_core\domain\entities\User;
 
 class AuthProvider implements AuthProviderInterface
 {
@@ -17,13 +15,8 @@ class AuthProvider implements AuthProviderInterface
 
     public function signin(string $email, string $password): void
     {
-        try {
-            $userid = $this->authnService->byCredentials($email, $password);
-            $user = User::find($userid);
-            $_SESSION['user'] = ['id' => $user->id, 'email' => $user->user_id, 'role' => $user->role];
-        } catch (Exception) {
-            throw new Exception("mauvais email ou mot de passe");
-        }
+        $user = $this->authnService->byCredentials($email, $password);
+        $_SESSION['user'] = ['id' => $user->id, 'email' => $user->user_id, 'role' => $user->role];
     }
 
     public function getSignedInUser(): ?array
