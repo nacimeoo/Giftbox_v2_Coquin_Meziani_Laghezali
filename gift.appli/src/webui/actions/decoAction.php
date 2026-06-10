@@ -2,7 +2,6 @@
 
 namespace gift\appli\webui\actions;
 
-// 👇 On ajoute les imports PSR-7 qui manquaient pour éviter les erreurs PHP
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Routing\RouteContext;
